@@ -6,15 +6,29 @@
 Welcome to CoopRobo's documentation!
 ====================================
 
+
+.. image:: /img/collab.jpg
+
+.. Indices and tables
+.. ==================
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+* :ref:`robots`
 
+.. _robots:
 
-Indices and tables
-==================
+.. toctree::
+   :maxdepth: 2
+   :caption: Robots
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   pioneer
+   ur3
+   meka
+   schunk
