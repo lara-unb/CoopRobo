@@ -6,6 +6,8 @@
 Welcome to CoopRobo's documentation!
 ====================================
 
+Collaborative Robotics project
+
 
 .. image:: /img/collab.jpg
 
