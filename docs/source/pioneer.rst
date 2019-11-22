@@ -8,3 +8,5 @@ Pioneer
    :caption: Contents:
 
    pioneer-tuto/lab1
+   pioneer-tuto/lab2
+   pioneer-tuto/lab3
