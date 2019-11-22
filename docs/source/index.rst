@@ -34,3 +34,4 @@ Collaborative Robotics project
    ur3
    meka
    schunk
+   docs-ref
