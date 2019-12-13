@@ -41,6 +41,17 @@ Procedimentos
 * Compile o workspace:
     * $ catkin_make
 
+Exemplo
+-------
+
+.. raw:: html
+
+    <div style="text-align: center; margin-bottom: 2em;">
+    <script id="asciicast-287858" src="https://asciinema.org/a/287858.js" async data-rows="25"></script>
+    </div>
+
+
+
 Referências
 -----------
 Esse tutorial foi baseado no tutorial Creating a ROS Package do ROS:
