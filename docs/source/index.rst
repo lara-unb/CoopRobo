@@ -35,3 +35,15 @@ Collaborative Robotics project
    meka
    schunk
    docs-ref
+
+* :ref:`cameras`
+
+.. _cameras:
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Cameras
+
+   kinect
+   videre camera mono
+   videre camera color
