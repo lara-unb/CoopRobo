@@ -36,19 +36,3 @@ Collaborative Robotics project
    schunk
    docs-ref
 
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-* :ref:`cameras`
-
-.. _cameras:
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Cameras
-
-   kinect
-   videre camera mono
-   videre camera color
