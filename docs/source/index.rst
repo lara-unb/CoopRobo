@@ -36,11 +36,12 @@ Collaborative Robotics project
    schunk
    docs-ref
 
-* :ref:`cameras`
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+* :ref:`cameras`
 
 .. _cameras:
 
