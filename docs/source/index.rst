@@ -38,6 +38,10 @@ Collaborative Robotics project
 
 * :ref:`cameras`
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
 .. _cameras:
 
 .. toctree::
