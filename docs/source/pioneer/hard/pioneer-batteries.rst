@@ -31,6 +31,9 @@ Battery Indicators and Low Voltage Conditions
     .. note::
         The batteries voltage is monitored by a own package, this package if necessary notifies the user and shut down automatically the operating system. See more in `robot monitor`_.
 
+    .. Attention::
+        The Pioneer family has a board which all the batteries are connected, there is a 20 Amp car fuse in this board. Please be sure that this fuse is connected and working. The robot should not be able to power up without it.
+
 .. _robot monitor: monitor.html#batteries
 ..  todo: make this package
 

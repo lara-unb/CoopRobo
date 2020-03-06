@@ -30,6 +30,9 @@ Power Supply
 The Computer is powered by a DC-DC Circuit. Athos and Aramis have an M4-ATX and Porthos have a Pico PSU-160-XT.
 They are only used to power up the computer using the 24 pin ATX connector. Others accessories, such as Kinect and cameras, use the `Motor Power Board`_.
 
+    .. Attention::
+        The Pioneer family has a board which all the batteries are connected, there is a 20 Amp car fuse in this board. Please be sure that this fuse is connected and working. The robot should not be able to power up without it.
+
 .. _Motor Power Board: power_board.html
 
 M4-ATX
