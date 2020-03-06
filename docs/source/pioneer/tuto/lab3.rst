@@ -1,5 +1,5 @@
-Mobile Robotics Lab: Assignment 3
-=================================
+Mobile Robotics Lab 3
+=====================
 
 Objetivos
 ---------

@@ -1,5 +1,5 @@
-Mobile Robotics Lab: Assignment 1
-================================= 
+Mobile Robotics Lab 1
+===================== 
 
 Objetivos
 ---------
