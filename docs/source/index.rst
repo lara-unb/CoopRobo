@@ -30,8 +30,7 @@ Collaborative Robotics project
    :maxdepth: 2
    :caption: Robots
 
-   pioneer
-   ur3
-   meka
-   schunk
+   aerial
+   mobile
+   manipulators
    docs-ref
