@@ -5,7 +5,10 @@ Pioneer
 
 .. toctree::
    :maxdepth: 2
-   :caption: Hardware
+   :caption: Modelling
+
+   pioneer/model/kinematics
+   pioneer/model/dynamics
 
 .. toctree::
    :maxdepth: 2
@@ -18,6 +21,16 @@ Pioneer
    pioneer/hard/pioneer-batteries
    pioneer/hard/pioneer-gps
    pioneer/hard/pioneer-imu
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Software
+
+   pioneer/soft/ros
+   pioneer/soft/gazebo
+   pioneer/soft/p2os
+   pioneer/soft/move-base
+   pioneer/soft/archsystem
 
 .. toctree::
    :maxdepth: 1
