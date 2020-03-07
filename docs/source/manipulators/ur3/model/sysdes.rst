@@ -2,26 +2,27 @@ System Description
 ==================
 
 
-Falar do Robô
-~~~~~~~~~~~~~
+Overview
+~~~~~~~~
 
-The robot UR3 is ...
+The UR3 is a table-top collaborative robot. With its 3 kg payload it is very capable and its small footprint makes it suitable for limited workspace situations. With its infinite turn on the end joint, several activities can be perfomed with grippers attached at robot tool connector.
 
-Applications:
+Some of its applications:
 
-- Collaborative work
+- Laboratory work
+- Assembly tasks
+- Polishing
 - Soldering
 - Gluing
 - Screwing
 - Painting
 - Pick and place
 - Operating hand tools
-- Laboratory work
 - Fume hood tasks
 
 
 Description
------------
+~~~~~~~~~~~
 
 - Weight: 11.2 kg
 - Payload: 3 kg 
@@ -33,15 +34,15 @@ Description
 - Noise: Comparatively noiseless
 - IP classification: IP64
 
-Comunicação
-~~~~~~~~~~~
+Communication
+~~~~~~~~~~~~~
 
 - TCP/IP 100 Mbit: IEEE 802.3u, 100BASE-TX
 - Ethernet socket & Modbus TCP
 
 
-Caixa mãe
-~~~~~~~~~
+Control Box
+~~~~~~~~~~~
 
-PC Linux
+Linux PC
 ~~~~~~~~
