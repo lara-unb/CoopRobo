@@ -5,4 +5,4 @@ Mobile Robots
    :maxdepth: 1
    :caption: Robots
 
-   pioneer
+   mobile/pioneer

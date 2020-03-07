@@ -5,6 +5,6 @@ Manipulators
    :maxdepth: 1
    :caption: Robots
 
-   ur3
-   meka
-   schunk
+   manipulators/ur3
+   manipulators/meka
+   manipulators/schunk
