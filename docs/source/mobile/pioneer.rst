@@ -8,7 +8,7 @@ Pioneer
    :caption: Modelling
 
    pioneer/model/kinematics
-   pioneer/model/dynamics
+   .. pioneer/model/dynamics
 
 .. toctree::
    :maxdepth: 2
