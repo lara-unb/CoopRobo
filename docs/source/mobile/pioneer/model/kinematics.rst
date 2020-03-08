@@ -32,9 +32,9 @@ The differential drive consists of two wheels mounted in the same axis with sepa
 .. paragrafo sobre robos com rodas
 
 "Wheeled Mobile Robots (WMR) constitute a class of mechanical systems characterized by kinematics constraints that are not integrable and cannot, therefore, be eliminated from the model equations" [3]_.
-In order to represent the motion of a mobile robot, we must define the reference frames and determine its position.
-Considering the robot as a rigid body, there are two essential frames to a robot.
-The global reference frame that is world fixed and the local reference frame, which is robot fixed.
+In order to represent the motion of a mobile robot, we must define the reference frames and determine their position.
+There are two essential frames to a robot if we consider the robot as a rigid body.
+They are the global reference frame, that is world fixed, and the local reference frame, which is robot fixed.
 
 .. figure:: /img/pioneer/robot_frames.png
   :width: 300 px
