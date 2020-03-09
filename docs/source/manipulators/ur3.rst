@@ -3,6 +3,7 @@ UR3
 
 
 .. image:: /img/ur3.jpg
+    :align: center
 
 .. toctree::
    :maxdepth: 1
