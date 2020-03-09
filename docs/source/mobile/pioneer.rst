@@ -5,7 +5,7 @@ Pioneer
 
 .. toctree::
    :maxdepth: 2
-   :caption: Modelling
+   :caption: Modeling
 
    pioneer/model/kinematics
    pioneer/model/probmotion
