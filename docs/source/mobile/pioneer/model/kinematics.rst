@@ -26,12 +26,10 @@ Here, the text focus on wheeled robots, which can only move in 2D space.
 The P3-DX is a two-wheel-drive and P3-AT is a four-wheel-drive.
 The `Omron Adept MobileRobots`_ considers in its manual the P3-DX as a differential drive robot and the P3-AT as a skid/slip drive robot.
 For our sake, both are modeled as differential drive vehicles because the exact center of rotation in a skid/slip drive is unpredictable [1]_.
-The differential drive consists of two wheels mounted in the same axis with separated motors [2]_.
 
 
 .. paragrafo sobre robos com rodas
 
-"Wheeled Mobile Robots (WMR) constitute a class of mechanical systems characterized by kinematics constraints that are not integrable and cannot, therefore, be eliminated from the model equations" [3]_.
 In order to represent the motion of a mobile robot, we must define the reference frames and determine their position.
 There are two essential frames to a robot if we consider the robot as a rigid body.
 They are the global reference frame, that is world fixed, and the local reference frame, which is robot fixed.
@@ -64,19 +62,82 @@ Or, we can map obstacles sensed by the robot in terms of the global reference fr
 
 The *orthogonal rotation matrix* does the map between these frames as a function of the robot's current pose.
 
-
 .. math::
   \dot{\xi_R} = R(\theta) \dot{\xi_I}
 
+Wheels and its constraints
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+"Wheeled Mobile Robots (WMR) constitute a class of mechanical systems characterized by kinematics constraints that are not integrable and cannot, therefore, be eliminated from the model equations" [2]_.
+If we want to study and describe a robot motion, we also must specify which are the hypotheses and constraints of the wheels.
+There are three essential hypotheses about the kinematics model of the wheeled robot during the motion; they are:
+
+- Each wheel remain perpendicular about its plane;
+- There is only one contact point between plane and wheel;
+- There is only rolling without slipping;
+
+And two constraints:
+
+- About rolling: the motion component along the wheel plane is equal to the rotation velocity of the wheel;
+- About slipping: the motion component along the orthogonal direction is equal to zero;
+
+Some authors may call these constraints as "the pure rolling and rotation condition".
+
+
+Differential Drive Model
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Now we delve into modeling of a differential drive kinematic.
+Dudek et al. say that the differential drive consists of two wheels mounted in the same axis with separated motors [3]_.
+Each wheel contributes to the robot motion, so to fully describe the robot motion, we must compute each contribution.
+
+.. figure:: /img/pioneer/wheel_vel.png
+   :align: right
+   :width: 400 px
+   :figwidth: 420 px
+   :alt: The global reference frame and the robot local reference frame.
+
+   Wheel velocities and the robot frame.
+
+The image shows the robot, the wheel velocities, and the local frame.
+:math:`\dot{\phi}_1` is the left wheel velocity along the ground and :math:`\dot{\phi}_2` the right wheel velocity.
+As the wheels contribute independently to the robot motion, we can analyze each contribution separately.
+
+Point P is halfway between the two wheels, so each wheel contributes with half of the linear speed of the robot in the direction of :math:`X_R`.
+And, using the equation which relates the angular speed of disk with its linear speed, we have:
+
+.. math::
+   \begin{array}{c}
+      v_i   = \frac{\dot{\phi}_i r}{2} \\
+   \omega_i = (-1^i)\frac{\dot{\phi}_i r}{2 l} \\
+      \text{where } i = \{1, 2\}
+   \end{array}
+
+Using the superposition theorem, we have the equations for the linear velocity in the direction of :math:`X_R` and the angular velocity in the direction of :math:`Z_R`:
+
+.. math::
+   \begin{array}{c}
+   v      & = &   v_1 + v_2 \\
+   \omega & = & -\omega_1 + \omega_2
+   \end{array}
+
 Forward Kinematics
-~~~~~~~~~~~~~~~~~~
+------------------
 
 .. math::
    \dot{\xi_I} = \left[ \begin{array}{c} \dot{x} \\ \dot{y} \\ \dot{\theta} \end{array} \right] = f(l, r, \theta, \dot{\phi_1}, \dot{\phi_2})
 
+Being the :math:`\dot{\phi}_1` and :math:`\dot{\phi}_2` the inputs of the robot system, we have the forward kinematic model:
+
+.. math::
+  \dot{\xi_R} & = & 
+  \left[ \begin{array}{c} \frac{r}{2} &  \frac{r}{2} \\ 
+                                0       &        0 \\ 
+                        -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right] \left[ \begin{array}{c} \dot{\phi}_1 & \dot{\phi}_2 \end{array} \right]
+
 
 Inverse Kinematics
-~~~~~~~~~~~~~~~~~~
+------------------
 
 
 .. math::
@@ -84,10 +145,15 @@ Inverse Kinematics
 
 
 
-.. figure:: /img/diff_drive.png
+.. figure:: /img/pioneer/diff_drive.png
    :alt: A differential-drive robot in its global reference frame.
 
    A differential-drive robot in its global reference frame. Figure from [1]_.
+
+Kinematic Model
+~~~~~~~~~~~~~~~
+
+The kinematics of a differential-drive mobile robot described in the inertial frame :math:`{ X_I , Y_I , θ }` is given by
 
 .. math::
   \left[ \begin{array}{c} \dot{x} \\ \dot{y} \\ \dot{\theta} \end{array} \right] & = & 
@@ -106,8 +172,8 @@ Where :math:`x`, :math:`y` and :math:`\theta` are the coordinates of the robot i
 .. References
 
 .. [1] Roland Siegwart and Illah R. Nourbakhsh. 2004. Introduction to Autonomous Mobile Robots. Bradford Company, USA.
-.. [2] Gregory Dudek and Michael Jenkin. 2010. Computational Principles of Mobile Robotics (2nd. ed.). Cambridge University Press, USA.
-.. [3] G. Campion, G. Bastin and B. Dandrea-Novel, "`Structural properties and classification of kinematic and dynamic models of wheeled mobile robots`_," in IEEE Transactions on Robotics and Automation, vol. 12, no. 1, pp. 47-62, Feb. 1996.
+.. [2] G. Campion, G. Bastin and B. Dandrea-Novel, "`Structural properties and classification of kinematic and dynamic models of wheeled mobile robots`_," in IEEE Transactions on Robotics and Automation, vol. 12, no. 1, pp. 47-62, Feb. 1996.
+.. [3] Gregory Dudek and Michael Jenkin. 2010. Computational Principles of Mobile Robotics (2nd. ed.). Cambridge University Press, USA.
 .. [4] L. Feng, Y. Koren and J. Borenstein, "`Cross-coupling motion controller for mobile robots`_," in IEEE Control Systems Magazine, vol. 13, no. 6, pp. 35-43, Dec. 1993.
 
 .. _Omron Adept MobileRobots: http://www.mobilerobots.com/Mobile_Robots.aspx
