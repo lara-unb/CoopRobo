@@ -34,4 +34,5 @@ Collaborative Robotics project
    mobile
    manipulators
    docs-ref
+   camera
 
