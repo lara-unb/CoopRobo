@@ -97,7 +97,7 @@ Each wheel contributes to the robot motion, so to fully describe the robot motio
    :figwidth: 420 px
    :alt: The global reference frame and the robot local reference frame.
 
-   Wheel velocities and the robot frame.
+   Wheel velocities and the robot frame. :math:`r` is the wheel radius, while the distance between the two wheels is :math:`l`.
 
 The image shows the robot, the wheel velocities, and the local frame.
 :math:`\dot{\phi}_1` is the left wheel velocity along the ground and :math:`\dot{\phi}_2` the right wheel velocity.
@@ -121,19 +121,45 @@ Using the superposition theorem, we have the equations for the linear velocity i
    \omega & = & -\omega_1 + \omega_2
    \end{array}
 
-Forward Kinematics
-------------------
-
-.. math::
-   \dot{\xi_I} = \left[ \begin{array}{c} \dot{x} \\ \dot{y} \\ \dot{\theta} \end{array} \right] = f(l, r, \theta, \dot{\phi_1}, \dot{\phi_2})
-
-Being the :math:`\dot{\phi}_1` and :math:`\dot{\phi}_2` the inputs of the robot system, we have the forward kinematic model:
+In the local frame, we have the following kinematic equation:
 
 .. math::
   \dot{\xi_R} & = & 
   \left[ \begin{array}{c} \frac{r}{2} &  \frac{r}{2} \\ 
                                 0       &        0 \\ 
-                        -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right] \left[ \begin{array}{c} \dot{\phi}_1 & \dot{\phi}_2 \end{array} \right]
+                        -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right] \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
+
+Forward Kinematics
+------------------
+
+The forward kinematics problem tries to solve the problem when we have the control inputs, and we must know where the robot goes in the global frame.
+As we have seen, to solve this question, we should know five parameters of the robot — two parameters about the robot geometry, :math:`l` and :math:`r`, the current robot orientation, :math:`\theta`, and, at least, the two inputs, :math:`\dot{\phi}_1` and :math:`\dot{\phi}_2`.
+
+.. math::
+   \dot{\xi_I} = \left[ \begin{array}{c} \dot{x} \\ \dot{y} \\ \dot{\theta} \end{array} \right] = f(l, r, \theta, \dot{\phi_1}, \dot{\phi_2})
+
+:math:`f` is the function that solves the problem.
+
+.. math::
+   R(\theta)^{-1} = \left[ \begin{array}{c} cos \theta &-sin \theta & 0 \\
+                                            sin \theta & cos \theta & 0 \\
+                                                 0     &      0     & 1 \end{array} \right]
+
+
+.. math::
+  f(l, r, \theta, \dot{\phi_1}, \dot{\phi_2}) & = & 
+  \left[ \begin{array}{c} cos \theta &-sin \theta & 0 \\
+                          sin \theta & cos \theta & 0 \\
+                               0     &      0     & 1 \end{array} \right]
+  \left[ \begin{array}{c} \frac{r}{2} &  \frac{r}{2} \\ 
+                                0       &        0 \\ 
+                        -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right] \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
+
+.. math::
+  \dot{\xi_I} & = & R(\theta)^{-1}
+  \left[ \begin{array}{c} \frac{r}{2} &  \frac{r}{2} \\ 
+                                0       &        0 \\ 
+                        -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right] \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
 
 
 Inverse Kinematics
@@ -153,12 +179,12 @@ Inverse Kinematics
 Kinematic Model
 ~~~~~~~~~~~~~~~
 
-The kinematics of a differential-drive mobile robot described in the inertial frame :math:`{ X_I , Y_I , θ }` is given by
+The kinematics of a differential-drive mobile robot described in the inertial frame :math:`\{ X_I , Y_I , θ \}` is given by
 
 .. math::
   \left[ \begin{array}{c} \dot{x} \\ \dot{y} \\ \dot{\theta} \end{array} \right] & = & 
   \left[ \begin{array}{c} v \cos \theta \\ v \sin \theta \\ \omega \end{array} \right] & = & 
-  \left[ \begin{array}{c} \cos \theta & 0 \\ \sin \theta & 0 \\ 0 & 1 \end{array} \right] \left[ \begin{array}{c} v & \omega \end{array} \right]
+  \left[ \begin{array}{c} \cos \theta & 0 \\ \sin \theta & 0 \\ 0 & 1 \end{array} \right] \left[ \begin{array}{c} v \\ \omega \end{array} \right]
 
 Where :math:`x`, :math:`y` and :math:`\theta` are the coordinates of the robot in the global frame and :math:`u = (v, \omega)` is the control vector.
 
