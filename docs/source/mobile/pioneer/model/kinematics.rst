@@ -95,7 +95,7 @@ Each wheel contributes to the robot motion, so to fully describe the robot motio
    :align: right
    :width: 400 px
    :figwidth: 420 px
-   :alt: The global reference frame and the robot local reference frame.
+   :alt: Wheel velocities and the robot frame.
 
    Wheel velocities and the robot frame.
 
@@ -273,7 +273,7 @@ The robot can turn in the place aligning its orientation aiming the goal positio
 .. figure:: /img/pioneer/robot_3_moves.png
    :width: 450 px
    :align: center
-   :alt: A differential-drive robot in its global reference frame.
+   :alt: A robot is moving around with the proposed motion framework.
 
    A robot is moving around with the proposed motion framework.
 
@@ -286,6 +286,29 @@ The final robot state should be :math:`\xi'''_I = [ x_d, y_d, \theta_d ]^T`.
 
 Kinematic Model
 ~~~~~~~~~~~~~~~
+
+For now, we saw the kinematics of a two-wheeled robot.
+So, we should be able to build a system or software capable of, using the maths showed, move a robot to any reachable goal.
+The control theory is the branch of maths dedicated to this problem.
+A control system sends inputs to the system and leads the variables of the system to the desired goal.
+Our system is a mobile robot.
+And, using the previous equations, the inputs are the spin speed of each wheel, and the output is the pose of the robot.
+
+.. figure:: /img/pioneer/robot_sys.png
+   :scale: 75%
+   :align: center
+
+A controller should give the system the inputs necessary to perform the desired action. As in the image below:
+
+.. figure:: /img/pioneer/controller_kin.png
+
+If we see the controller and the robot as a single system, we can have another system with the desired state as input and the robot state as output.
+Then we can build a new controller which deals with choosing the desired state.
+In the same manner, if we would like to control the velocities of the robot and not only the pose, to be able to control how the robot moves.
+We can add the velocities to the robot state vector and control them with the equations related.
+
+.. figure:: /img/pioneer/robot_sys_plus.png
+
 
 The kinematics of a differential-drive mobile robot described in the inertial frame :math:`\{ X_I , Y_I , θ \}` is given by
 
