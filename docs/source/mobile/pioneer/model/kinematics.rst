@@ -238,9 +238,33 @@ The function :math:`g` is the mathematical inverse of the function :math:`f`.
                           \frac{r sin \theta}{2} &  \frac{r sin \theta}{2} \\ 
                          -\frac{r}{2 l}          &  \frac{r}{2 l}    \end{array} \right]^{-1}
 
-As we can see, the matrix which represents the function :math:`f` is not be invertible.
-This is the main problem of any inverse kinematics, while the forward kinematics can be modeled, the inverse kinematics it is often not analitically solvable.
-However, we can try to solve the problem, limiting the possibles solution like :math:`\dot{\phi}_1 = \dot{\phi}_2` or :math:`\dot{\phi}_1 = -\dot{\phi}_2`.
+As we can see, the matrix which represents the function :math:`f` is not invertible.
+The forward kinematics is an easy problem because we have one and only one solution.
+Nevertheless, the inverse kinematics is often not analytically solvable; commonly, we have more than one solution or none.
+However, we can try to solve the problem, limiting the possibles solutions like :math:`\dot{\phi}_1 = \dot{\phi}_2` or :math:`\dot{\phi}_1 = -\dot{\phi}_2`.
+
+Straight Line
+^^^^^^^^^^^^^
+
+If we limit the solution to :math:`\dot{\phi}_1 = \dot{\phi}_2 = \dot{\phi}`, with :math:`\dot{\phi} > 0`, the robot should move along a straight line.
+Then, the robot motion simplifies to:
+
+.. math::
+   \xi_I = \left[ \begin{array}{c} x' \\ y' \\ \theta' \end{array} \right] = 
+   \left[ \begin{array}{c} x + v cos (\theta) \delta t \\ y + v sin (\theta) \delta t \\ \theta \end{array} \right]
+
+
+Rotaion in place
+^^^^^^^^^^^^^^^^
+
+.. If we limit the solution to :math:`\dot{\phi}_1 = \dot{\phi}_2 = \dot{\phi}`, with :math:`\dot{\phi} > 0`, the robot should move along a straight line.
+.. Then, the robot motion simplifies to:
+
+Similarly, if we limit the solution to :math:`-\dot{\phi}_1 = \dot{\phi}_2`, with :math:`\dot{\phi}_2 > 0`, the robot should rotate in the place around the point P.
+
+.. math::
+   \xi_I = \left[ \begin{array}{c} x' \\ y' \\ \theta' \end{array} \right] = 
+   \left[ \begin{array}{c} x \\ y \\ \theta + \frac{2 v}{l} \delta t \end{array} \right]
 
 .. figure:: /img/pioneer/diff_drive.png
    :alt: A differential-drive robot in its global reference frame.
