@@ -43,7 +43,7 @@ They are the global reference frame, that is world fixed, and the local referenc
    The global reference frame and the robot local reference frame. Figure from [1]_.
 
 The figure shows a robot and its reference frames.
-Where the :math:`X_I` and :math:`Y_I` defines the global reference frame, and :math:`X_R` and :math:`Y_R` defines the local reference frame.
+Where the :math:`X_I` and :math:`Y_I` defines the global reference frame, also known as the inertial frame, and :math:`X_R` and :math:`Y_R` defines the local reference frame or the robot frame.
 The coordinates :math:`x` and :math:`y` represent the robot's position in the global reference frame, point P, whereas :math:`\theta` is the angular difference among the global and the local reference frames.
 Thus, we represent the robot's pose as the vector with these three components.
 
@@ -97,14 +97,13 @@ Each wheel contributes to the robot motion, so to fully describe the robot motio
    :figwidth: 420 px
    :alt: The global reference frame and the robot local reference frame.
 
-   Wheel velocities and the robot frame. :math:`r` is the wheel radius, while the distance between the two wheels is :math:`l`.
+   Wheel velocities and the robot frame.
 
 The image shows the robot, the wheel velocities, and the local frame.
-:math:`\dot{\phi}_1` is the left wheel velocity along the ground and :math:`\dot{\phi}_2` the right wheel velocity.
+:math:`\dot{\phi}_1` and :math:`\dot{\phi}_2` is the spin speed of the left wheel and right wheel.
+:math:`r` is the wheel radius, while the distance between the two wheels is :math:`l`.
+While :math:`v_1` is the left wheel velocity along the ground and :math:`v_2` the right wheel velocity.
 As the wheels contribute independently to the robot motion, we can analyze each contribution separately.
-
-Point P is halfway between the two wheels, so each wheel contributes with half of the linear speed of the robot in the direction of :math:`X_R`.
-And, using the equation which relates the angular speed of disk with its linear speed, we have:
 
 .. math::
    \begin{array}{c}
@@ -112,6 +111,12 @@ And, using the equation which relates the angular speed of disk with its linear 
    \omega_i = (-1^i)\frac{\dot{\phi}_i r}{2 l} \\
       \text{where } i = \{1, 2\}
    \end{array}
+
+Point :math:`P` is halfway between the two wheels, so each wheel contributes with half of the linear speed of the robot in the direction of :math:`X_R`.
+Each wheel also adds a new component to the angular speed of the robot.
+:math:`v_1` moves the robot counter-clockwise around point :math:`P` while :math:`v_2` moves it clockwise.
+That is why they differ in their sign.
+And, using the equation which relates the angular speed of disk with its linear speed, we have the above equations.
 
 Using the superposition theorem, we have the equations for the linear velocity in the direction of :math:`X_R` and the angular velocity in the direction of :math:`Z_R`:
 
@@ -129,6 +134,9 @@ In the local frame, we have the following kinematic equation:
                                 0       &        0 \\ 
                         -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right] \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
 
+.. note::
+  In the robot frame, there is no velocity in the direction of :math:`Y_R`. Because we assumed the pure rolling and rotation condition. And yet he can reach any point in the global frame.
+
 Forward Kinematics
 ------------------
 
@@ -138,13 +146,32 @@ As we have seen, to solve this question, we should know five parameters of the r
 .. math::
    \dot{\xi_I} = \left[ \begin{array}{c} \dot{x} \\ \dot{y} \\ \dot{\theta} \end{array} \right] = f(l, r, \theta, \dot{\phi_1}, \dot{\phi_2})
 
-:math:`f` is the function that solves the problem.
+:math:`f` is the function that solves the forward kinematics problem.
+To map between the parameter vector, :math:`\{l, r, \theta, \phi_1, \phi_2\}`, and the state of the robot in the inertial frame.
+We should use the matrix, which links the spin speed and the derivative of the robot state in the local frame.
+Then, we can transform the robot velocities in the local frame to the global frame utilizing the inverse of the rotation matrix.
 
 .. math::
+   \begin{array}{c}
    R(\theta)^{-1} = \left[ \begin{array}{c} cos \theta &-sin \theta & 0 \\
                                             sin \theta & cos \theta & 0 \\
-                                                 0     &      0     & 1 \end{array} \right]
+                                                 0     &      0     & 1 \end{array} \right], &
+  \dot{\xi_I} = R(\theta)^{-1} \dot{\xi_R}, &
+  \dot{\xi_R} =
+  \left[ \begin{array}{c} \frac{r}{2} &  \frac{r}{2} \\ 
+                                0       &        0 \\ 
+                        -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right] \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
+  \end{array}
 
+
+.. math::
+  \dot{\xi_I} & = & R(\theta)^{-1}
+  \left[ \begin{array}{c} \frac{r}{2} &  \frac{r}{2} \\ 
+                                0       &        0 \\ 
+                        -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right]
+  \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
+
+Then,
 
 .. math::
   f(l, r, \theta, \dot{\phi_1}, \dot{\phi_2}) & = & 
@@ -153,23 +180,67 @@ As we have seen, to solve this question, we should know five parameters of the r
                                0     &      0     & 1 \end{array} \right]
   \left[ \begin{array}{c} \frac{r}{2} &  \frac{r}{2} \\ 
                                 0       &        0 \\ 
-                        -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right] \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
+                        -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right] 
+  \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
 
 .. math::
-  \dot{\xi_I} & = & R(\theta)^{-1}
-  \left[ \begin{array}{c} \frac{r}{2} &  \frac{r}{2} \\ 
-                                0       &        0 \\ 
-                        -\frac{r}{2 l}  & \frac{r}{2 l}  \end{array} \right] \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
+  f(l, r, \theta, \dot{\phi_1}, \dot{\phi_2}) & = & 
+  \left[ \begin{array}{c} \frac{r cos \theta}{2} &  \frac{r cos \theta}{2} \\ 
+                          \frac{r sin \theta}{2} &  \frac{r sin \theta}{2} \\ 
+                         -\frac{r}{2 l}          &  \frac{r}{2 l}    \end{array} \right]
+  \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
 
+Or
+
+.. math::
+  \dot{\xi_I} & = &
+  \left[ \begin{array}{c} \frac{r cos \theta}{2} &  \frac{r cos \theta}{2} \\ 
+                          \frac{r sin \theta}{2} &  \frac{r sin \theta}{2} \\ 
+                         -\frac{r}{2 l}          &  \frac{r}{2 l}    \end{array} \right]
+  \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
+
+.. note::
+  The matrix which maps spin speed to the robot velocities is commonly known as **Jacobian Matrix**.
+
+Well, we know the relationship between spin speeds and robot velocities, but what about the robot pose in the global frame?
+
+.. math::
+  \xi_I = \int_{0}^{t}
+  \left[ \begin{array}{c} \frac{r cos \theta}{2} &  \frac{r cos \theta}{2} \\ 
+                          \frac{r sin \theta}{2} &  \frac{r sin \theta}{2} \\ 
+                         -\frac{r}{2 l}          &  \frac{r}{2 l}    \end{array} \right]
+  \left[ \begin{array}{c} \dot{\phi}_1 \\ \dot{\phi}_2 \end{array} \right]
+  dt
+
+Or
+
+.. math::
+  \begin{cases}
+  x(t) = \frac{r}{2} \int_{0}^{t} (\dot{\phi_1}(t) + \dot{\phi_2}(t)) cos (\theta(t)) dt \\
+  y(t) = \frac{r}{2} \int_{0}^{t} (\dot{\phi_1}(t) + \dot{\phi_2}(t)) sin (\theta(t)) dt \\
+  \theta(t) = \frac{r}{2 l} \int_{0}^{t} (\dot{\phi_2}(t) - \dot{\phi_1}(t)) dt
+  \end{cases}
 
 Inverse Kinematics
 ------------------
 
+The inverse kinematics problem is the opposite of the forward problem.
+The problem aims to solve the following question: "What are the controls needed to reach the desired pose?".
 
 .. math::
    \left[ \begin{array}{c} \dot{\phi_1} \\ \dot{\phi_2}\end{array} \right] = g(\dot{\xi_I})
 
+The function :math:`g` is the mathematical inverse of the function :math:`f`.
 
+.. math::
+   g = f^{-1} = 
+   \left[ \begin{array}{c} \frac{r cos \theta}{2} &  \frac{r cos \theta}{2} \\ 
+                          \frac{r sin \theta}{2} &  \frac{r sin \theta}{2} \\ 
+                         -\frac{r}{2 l}          &  \frac{r}{2 l}    \end{array} \right]^{-1}
+
+As we can see, the matrix which represents the function :math:`f` is not be invertible.
+This is the main problem of any inverse kinematics, while the forward kinematics can be modeled, the inverse kinematics it is often not analitically solvable.
+However, we can try to solve the problem, limiting the possibles solution like :math:`\dot{\phi}_1 = \dot{\phi}_2` or :math:`\dot{\phi}_1 = -\dot{\phi}_2`.
 
 .. figure:: /img/pioneer/diff_drive.png
    :alt: A differential-drive robot in its global reference frame.
