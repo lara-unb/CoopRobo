@@ -257,19 +257,32 @@ Then, the robot motion simplifies to:
 Rotaion in place
 ^^^^^^^^^^^^^^^^
 
-.. If we limit the solution to :math:`\dot{\phi}_1 = \dot{\phi}_2 = \dot{\phi}`, with :math:`\dot{\phi} > 0`, the robot should move along a straight line.
-.. Then, the robot motion simplifies to:
-
 Similarly, if we limit the solution to :math:`-\dot{\phi}_1 = \dot{\phi}_2`, with :math:`\dot{\phi}_2 > 0`, the robot should rotate in the place around the point P.
 
 .. math::
    \xi_I = \left[ \begin{array}{c} x' \\ y' \\ \theta' \end{array} \right] = 
    \left[ \begin{array}{c} x \\ y \\ \theta + \frac{2 v}{l} \delta t \end{array} \right]
 
-.. figure:: /img/pioneer/diff_drive.png
+
+Motion Composition
+^^^^^^^^^^^^^^^^^^
+
+If we would like to drive the robot from any pose to some other pose in the global frame, we can decompose the motion in two rotations in place and one translation along a straight line.
+The robot can turn in the place aligning its orientation aiming the goal position, :math:`(x_d,y_d)`, then move forward to the goal position, and then turn in the place again to reach the goal orientation, :math:`\theta_d`.
+
+.. figure:: /img/pioneer/robot_3_moves.png
+   :width: 450 px
+   :align: center
    :alt: A differential-drive robot in its global reference frame.
 
-   A differential-drive robot in its global reference frame. Figure from [1]_.
+   A robot is moving around with the proposed motion framework.
+
+The image above tries to illustrate the proposed motion.
+The robot starts with the :math:`\xi_I = [ x, y, \theta ]^T`.
+Then it spun around the point :math:`P` and aim the desired position :math:`P' = (x_d,y_d)` reaching the pose :math:`\xi'_I = [ x, y, \theta_1 ]^T`.
+To reach the position, it moves forward to :math:`P' = (x_d,y_d)` and reaches :math:`\xi''_I = [ x_d, y_d, \theta_1 ]^T`.
+And then the robot spun again to from :math:`\theta_1` to :math:`\theta_d`.
+The final robot state should be :math:`\xi'''_I = [ x_d, y_d, \theta_d ]^T`.
 
 Kinematic Model
 ~~~~~~~~~~~~~~~
@@ -283,6 +296,10 @@ The kinematics of a differential-drive mobile robot described in the inertial fr
 
 Where :math:`x`, :math:`y` and :math:`\theta` are the coordinates of the robot in the global frame and :math:`u = (v, \omega)` is the control vector.
 
+.. figure:: /img/pioneer/diff_drive.png
+   :alt: A differential-drive robot in its global reference frame.
+
+   A differential-drive robot in its global reference frame. Figure from [1]_.
 
 
 .. note::
