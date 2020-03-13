@@ -65,6 +65,9 @@ The *orthogonal rotation matrix* does the map between these frames as a function
 .. math::
   \dot{\xi_R} = R(\theta) \dot{\xi_I}
 
+.. note::
+  It does not make sense to talk about the robot's pose in the local frame. Because, the point P, the origin of the coordinates, moves around with the robot. So, the robot's pose in the local frame is, always, :math:`\xi_R = [0, 0, 0]^T`. That is why the relationship is between the derivative of the pose in the frames.
+
 Wheels and its constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -225,7 +228,8 @@ Inverse Kinematics
 ------------------
 
 The inverse kinematics problem is the opposite of the forward problem.
-The problem aims to solve the following question: "What are the controls needed to reach the desired pose?".
+The problem aims to solve the following question: "Given the desired pose, which are the controls needed to reach the desired pose?".
+We already know the relationship between the velocity and 
 
 .. math::
    \left[ \begin{array}{c} \dot{\phi_1} \\ \dot{\phi_2}\end{array} \right] = g(\dot{\xi_I})
