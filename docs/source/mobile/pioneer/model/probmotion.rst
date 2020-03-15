@@ -39,9 +39,9 @@ The steering action adds uncertainty to the robot motion.
 As we can not predict the additional action, we can not guarantee that the control action will drive the robot to the desired pose.
 
 .. figure:: /img/pioneer/castor_prob.gif
-   :alt: Castor wheel producing a unpredictable movement.
+   :alt: Castor wheel producing a unpredictable behavior.
 
-   Castor wheel producing a unpredictable movement.
+   Castor wheel producing a unpredictable behavior.
 
 The above image shows the simulation of rotation in place of the P3-DX.
 The castor wheel begins not aligned to the rotation.
