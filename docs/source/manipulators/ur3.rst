@@ -3,7 +3,11 @@ UR3
 
 
 .. image:: /img/ur3.jpg
-    :align: center
+      :width: 400px
+      :height: 400px
+      :scale: 100 %
+      :alt: Power button
+      :align: center
 
 .. toctree::
    :maxdepth: 1
@@ -29,4 +33,4 @@ UR3
    :maxdepth: 1
    :caption: Tutorials:
 
-   ur3/tuto/lab1
+   ur3/tuto/first_c
