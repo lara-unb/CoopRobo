@@ -1,5 +1,5 @@
 .. figure:: img/Manipuladores.png
-    :width: 400px
+    :width: 600px
     :alt: Pur3 meka schunk
     :align: center
 
