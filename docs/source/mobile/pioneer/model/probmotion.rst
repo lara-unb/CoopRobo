@@ -12,7 +12,7 @@ Furthermore, study a way that could deal with this kind of problem.
 
 
 In the previous sections, we build a mathematical model looking at a mobile robot modeled with just two wheels.
-However, as we have seen, our robots have more than two wheels.
+However, our robots have more than two wheels.
 The P3-DX has three wheels, two motored, and a castor wheel.
 The P3-AT has four wheels and two motors, one for each side.
 None of them fits in our model.
@@ -22,7 +22,7 @@ Moreover, the four wheels violate the pure rolling and rotation condition.
 The castor wheel problem
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The castor wheel, unlike fixed wheels, is an off-centered orientable wheel that is orientable to the robot frame.
+The castor wheel, unlike fixed wheels, is an off-centered wheel that is orientable to the robot frame.
 
 .. figure:: /img/pioneer/castor-wheel.jpg
    :align: right

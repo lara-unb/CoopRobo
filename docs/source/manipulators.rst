@@ -1,11 +1,11 @@
+.. figure:: img/Manipuladores.png
+    :width: 600px
+    :alt: Pur3 meka schunk
+    :align: center
+
+
 Manipulators
 ============
-
-.. image:: /img/Manipuladores.png
-      :width: 400px
-      :height: 400px
-      :scale: 100 %
-      :align: center
 
 .. toctree::
    :maxdepth: 1
