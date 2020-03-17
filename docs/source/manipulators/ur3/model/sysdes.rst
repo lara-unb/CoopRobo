@@ -30,9 +30,9 @@ Some of its applications:
 - Fume hood tasks
 
 
-Description
-~~~~~~~~~~~
-.. list-table:: UR3 Description
+Specification
+~~~~~~~~~~~~~
+.. list-table:: UR3 Specification
    :widths: 50 50
    :header-rows: 0
 
@@ -51,11 +51,30 @@ Description
    * - Speed wrist joints
      - 360 degrees/sec 
    * - Other joints
-     - 180 degrees/sec.
+     - 180 degrees/sec
    * - Noise
      - Comparatively noiseless
    * - IP classification
      - IP64
+
+Coordinate System
+~~~~~~~~~~~~~~~~~
+
+.. image:: /img/ur3/sys_des/ind_dase.png
+      :width: 400px
+      :align: center
+
+.. image:: /img/ur3/sys_des/ind_tool.png
+      :width: 400px
+      :align: center
+
+.. image:: /img/ur3/sys_des/ur3_coordenadas.png
+      :width: 500px
+      :align: center
+
+.. image:: /img/ur3/sys_des/ind_eixos.jpg
+      :width: 400px
+      :align: center
 
 Communication
 ~~~~~~~~~~~~~
