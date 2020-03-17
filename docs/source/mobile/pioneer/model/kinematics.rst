@@ -288,8 +288,8 @@ To reach the position, it moves forward to :math:`P' = (x_d,y_d)` and reaches :m
 And then the robot spun again to from :math:`\theta_1` to :math:`\theta_d`.
 The final robot state should be :math:`\xi'''_I = [ x_d, y_d, \theta_d ]^T`.
 
-Kinematic Model
-~~~~~~~~~~~~~~~
+The Unicycle Model
+~~~~~~~~~~~~~~~~~~
 
 For now, we saw the kinematics of a two-wheeled robot.
 So, we should be able to build a system or software capable of, using the maths showed, move a robot to any reachable goal.

@@ -23,3 +23,22 @@ Porthos
 
 Porthos is Pioneer 3-AT
 
+
+.. figure:: /img/pioneer/athos_inside.png
+   :align: center
+   :alt: Athos inside.
+
+   Athos inside.
+
+
+.. figure:: /img/pioneer/hard_diag.png
+   :align: center
+   :alt: Hardware Diagram.
+
+   Hardware Diagram.
+
+.. figure:: /img/pioneer/soft_nav_diagram.png
+   :align: center
+   :alt: Navigation System Diagram.
+
+   Navigation System Diagram.
