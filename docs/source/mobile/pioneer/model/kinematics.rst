@@ -53,8 +53,9 @@ Thus, we represent the robot's pose as the vector with these three components.
 .. note::
   We could still assume the robot as a rigid body free in the space, with 6 degrees of freedom, :math:`[x, y, z, \phi, \psi, \theta]^T`.
   However, as the robot is moving subject to gravity, which keeps it confined to a euclidian plane, :math:`x` and :math:`y` describe the robot's position, and :math:`\theta` describes the orientation in the plane.
-  The 2D space in which the robot moves is called the *C-space* [5]_ firstly formalized in [6]_.
-  The *C-space* is the set of points were the robot can go, also called the configuration space.
+  The 2D space in which the robot lies is called the *C-space* [5]_, firstly formalized in [6]_, also called the configuration space.
+  A configuration is a complete specification of the position of every point in the system.
+  The space of all configurations is the *C-space*.
 
 We can now utilize this definition to describe elements represented in the local frame in the global frame and vice-versa.
 For example, we can map the motion calculated in the global frame to motion in the robot's local frame.
