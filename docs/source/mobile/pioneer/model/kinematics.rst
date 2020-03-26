@@ -291,7 +291,32 @@ The final robot state should be :math:`\xi'''_I = [ x_d, y_d, \theta_d ]^T`.
 The Unicycle Model
 ~~~~~~~~~~~~~~~~~~
 
-For now, we saw the kinematics of a two-wheeled robot.
+So far, we saw the kinematics of a two-wheeled robot.
+But now we talk about a more general and simple model.
+The previous model tells us how a robot with two wheels can reach a specific pose in the world, acting in the wheel speeds. 
+But, we do not care about how the wheel is turning; we care about the pose of the robot.
+The unicycle model represents a robot with only one wheel.
+If the wheel complies with our pure rotation and rolling condition, the wheel has two control inputs, the linear velocity, :math:`v`, in the axis :math:`X_R` and the angular velocity, :math:`\omega`, around :math:`Z_R`.
+So, the kinematics of a unicycle robot described in the inertial frame :math:`\{ X_I , Y_I , θ \}` is given by
+
+.. math::
+  \left[ \begin{array}{c} \dot{x} \\ \dot{y} \\ \dot{\theta} \end{array} \right] & = & 
+  \left[ \begin{array}{c} v \cos \theta \\ v \sin \theta \\ \omega \end{array} \right] & = & 
+  \left[ \begin{array}{c} \cos \theta & 0 \\ \sin \theta & 0 \\ 0 & 1 \end{array} \right] \left[ \begin{array}{c} v \\ \omega \end{array} \right]
+
+Where :math:`x`, :math:`y` and :math:`\theta` are the coordinates of the robot in the global frame and :math:`u = (v, \omega)` is the control vector.
+
+.. figure:: /img/pioneer/diff_drive.png
+   :alt: A differential-drive robot in its global reference frame.
+
+   A differential-drive robot in its global reference frame. Figure from [1]_.
+
+Commercial robots usually provide an interface to translate from a desired unicycle control input to desired wheel velocities.
+And a lower level dedicated microcontroller, which aims to control the wheel velocities.
+
+Notes on Control
+----------------
+
 So, we should be able to build a system or software capable of, using the maths showed, move a robot to any reachable goal.
 The control theory is the branch of maths dedicated to this problem.
 A control system sends inputs to the system and leads the variables of the system to the desired goal.
@@ -314,19 +339,6 @@ We can add the velocities to the robot state vector and control them with the eq
 .. figure:: /img/pioneer/robot_sys_plus.png
 
 
-The kinematics of a differential-drive mobile robot described in the inertial frame :math:`\{ X_I , Y_I , θ \}` is given by
-
-.. math::
-  \left[ \begin{array}{c} \dot{x} \\ \dot{y} \\ \dot{\theta} \end{array} \right] & = & 
-  \left[ \begin{array}{c} v \cos \theta \\ v \sin \theta \\ \omega \end{array} \right] & = & 
-  \left[ \begin{array}{c} \cos \theta & 0 \\ \sin \theta & 0 \\ 0 & 1 \end{array} \right] \left[ \begin{array}{c} v \\ \omega \end{array} \right]
-
-Where :math:`x`, :math:`y` and :math:`\theta` are the coordinates of the robot in the global frame and :math:`u = (v, \omega)` is the control vector.
-
-.. figure:: /img/pioneer/diff_drive.png
-   :alt: A differential-drive robot in its global reference frame.
-
-   A differential-drive robot in its global reference frame. Figure from [1]_.
 
 
 .. note::
@@ -340,8 +352,13 @@ Where :math:`x`, :math:`y` and :math:`\theta` are the coordinates of the robot i
 .. [2] G. Campion, G. Bastin and B. Dandrea-Novel, "`Structural properties and classification of kinematic and dynamic models of wheeled mobile robots`_," in IEEE Transactions on Robotics and Automation, vol. 12, no. 1, pp. 47-62, Feb. 1996.
 .. [3] Gregory Dudek and Michael Jenkin. 2010. Computational Principles of Mobile Robotics (2nd. ed.). Cambridge University Press, USA.
 .. [4] L. Feng, Y. Koren and J. Borenstein, "`Cross-coupling motion controller for mobile robots`_," in IEEE Control Systems Magazine, vol. 13, no. 6, pp. 35-43, Dec. 1993.
+.. [5] H. `Choset`_, K. M. Lynch, S. Hutchinson, G. Kantor, W. Burgard, L. E. Kavraki and S. Thrun, "`Principles of Robot Motion`_: Theory, Algorithms, and Implementations," MIT Press, Boston, 2005.
+.. [6] `Lozano-Perez`_, "`Spatial Planning`_: A Configuration Space Approach," in IEEE Transactions on Computers, vol. C-32, no. 2, pp. 108-120, Feb. 1983.
 
 .. _Omron Adept MobileRobots: http://www.mobilerobots.com/Mobile_Robots.aspx
 .. _Structural properties and classification of kinematic and dynamic models of wheeled mobile robots: https://ieeexplore.ieee.org/document/481750
 .. _Cross-coupling motion controller for mobile robots: https://ieeexplore.ieee.org/document/248002/
-
+.. _Choset: http://www.cs.cmu.edu/~motionplanning/
+.. _Principles of Robot Motion: https://mitpress.mit.edu/books/principles-robot-motion
+.. _Lozano-Perez: https://lis.csail.mit.edu/pubs/tlp/spatial-planning.pdf
+.. _Spatial Planning: https://ieeexplore.ieee.org/document/1676196

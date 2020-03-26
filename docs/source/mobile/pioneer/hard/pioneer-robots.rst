@@ -39,6 +39,8 @@ Porthos is Pioneer 3-AT
 
 .. figure:: /img/pioneer/soft_nav_diagram.png
    :align: center
+   :width: 690 px
+   :figwidth: 690 px
    :alt: Navigation System Diagram.
 
    Navigation System Diagram.
