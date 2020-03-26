@@ -50,6 +50,11 @@ Thus, we represent the robot's pose as the vector with these three components.
 .. math::
    \xi_I = \left[ \begin{array}{c} x \\ y \\ \theta \end{array} \right]
 
+.. note::
+  We could still assume the robot as a rigid body free in the space, with 6 degrees of freedom, :math:`[x, y, z, \phi, \psi, \theta]^T`.
+  However, as the robot is moving subject to gravity, which keeps it confined to a euclidian plane, :math:`x` and :math:`y` describe the robot's position, and :math:`\theta` describes the orientation in the plane.
+  The 2D space in which the robot moves is called the *C-space* [5]_ firstly formalized in [6]_.
+  The *C-space* is the set of points were the robot can go, also called the configuration space.
 
 We can now utilize this definition to describe elements represented in the local frame in the global frame and vice-versa.
 For example, we can map the motion calculated in the global frame to motion in the robot's local frame.
@@ -204,6 +209,7 @@ Or
 
 .. note::
   The matrix which maps spin speed to the robot velocities is commonly known as **Jacobian Matrix**.
+  "The Jacobian maps configuration velocities to workspace velocities" [5]_.
 
 Well, we know the relationship between spin speeds and robot velocities, but what about the robot pose in the global frame?
 
