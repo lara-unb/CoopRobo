@@ -117,7 +117,7 @@ As the wheels contribute independently to the robot motion, we can analyze each 
 .. math::
    \begin{array}{c}
       v_i   = \frac{\dot{\phi}_i r}{2} \\
-   \omega_i = (-1^i)\frac{\dot{\phi}_i r}{2 l} \\
+   \omega_i = \frac{\dot{\phi}_i r}{2 l} \\
       \text{where } i = \{1, 2\}
    \end{array}
 
