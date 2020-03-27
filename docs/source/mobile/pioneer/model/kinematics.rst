@@ -123,7 +123,7 @@ As the wheels contribute independently to the robot motion, we can analyze each 
 
 Point :math:`P` is halfway between the two wheels, so each wheel contributes with half of the linear speed of the robot in the direction of :math:`X_R`.
 Each wheel also adds a new component to the angular speed of the robot.
-:math:`v_1` moves the robot counter-clockwise around point :math:`P` while :math:`v_2` moves it clockwise.
+:math:`v_1` moves the robot clockwise around point :math:`P` while :math:`v_2` moves it counter-clockwise.
 That is why they differ in their sign.
 And, using the equation which relates the angular speed of disk with its linear speed, we have the above equations.
 
