@@ -17,6 +17,11 @@ Introduction
 
 PX4 is the professional open source autopilot, developed by both world-class developers from industry and academia, and supported by the active world wide community. The PX4 can run on multiple flight controll boards. Deserving highlight flight open hardware controllers of the `PixHawk`_ series, running PX4 on `NuttX OS`_ [1]_.  
 
+.. Dadas as opções de placas controladoras de voo disponíveis no mercado, escolheu-se o Pixhawk1 como piloto automático por seu melhor custo beneficio para o projeto.
+
+Given the options available on the market, Pixhawk 1 was chosen as an autopilot for its best cost benefit for the project.
+
+
 .. _Pixhawk: https://pixhawk.org
 .. _NuttX OS: https://nuttx.apache.org/
 
@@ -57,6 +62,23 @@ A UAV is any types of aircraft that can be controlled on the 3 axes of freedom a
 .. O “cérebro” de um drone é chamado de piloto automático, um instrumento responsavel por controlar a trajetória de voo da aeronave. Referindo-se a VANTs, o piloto automático consiste em um *software* de controle de voo sendo executado em um *hardware* especifico para a mesma função.
 
 The "brain" of a drone is called autopilot, an instrument responsible for controlling the aircraft's flight path. Referring to UAVs, the autopilot consists of flight control software running on specific hardware for the same function.
+
+Ground Control Station (GCS)
+-----------------------------
+
+.. Uma **Estação de Controle em Solo** (ECS), do inglês *Ground Control Station* (GCS), é uma plataforma de controle, normalmente uma aplicação de *software* sendo executada em um computador em solo, que se comunica com os VANTs por telemetria sem fio e provê aos operadores humanos o controle das aeronaves.
+
+A Ground Control Station (GCS) is a control platform, usually a software application running on a computer on the ground, which communicates with UAVs for wireless telemetry and provides human operators control of the aircraft.
+
+.. A estação em solo entrega ao controlador diversos dados em tempo real sobre o desempenho e posição dos VANTs e pode até servir como um "cockpit virtual", fornecendo muitos dos mesmos instrumentos que um piloto teria caso estivesse pilotando um avião. Contudo, um *software* de Controle em solo é normalmente utilizado para o planejamento, envio das missões de voo e definição de parâmetros de voo.
+
+The ground station delivers to the controller several data in real time on the performance and position of UAVs and can even serve as a "virtual cockpit", providing many of the same instruments that a pilot would have if he were flying an airplane. However, Ground Control  software is normally used for planning, uploading flight missions and defining flight parameters.
+
+.. Existem mais de dez estações de controle em solo diferentes. Na área de controle de VANTs, os principais controladores são Mission Planner, APM Planner 2, MAVProxy, QGroundControl e UgCS. Para Tablet/Smartphone, há Tower (DroidPlanner 3), MAVPilot, AndroPilot e SidePilot. [4]_
+
+There are more than ten different ground control stations. In the area of UAV control, the main controllers are Mission Planner, APM Planner 2, MAVProxy, QGroundControl e UgCS. For Tablet / Smartphone, there is Tower (DroidPlanner 3), MAVPilot, AndroPilot e SidePilot. [4]_
+
+.. https://ardupilot.org/copter/docs/common-choosing-a-ground-station.html#overview
 
 Dronecode Platform
 -------------------
@@ -164,7 +186,7 @@ PX4Flow is an optical flow smart camera that can track motion, and has as integr
 
 Most of its applications are directed to rotary-wing aircraft.
 
-Pixhawk1 specifications
+Pixhawk specifications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 -  **Processor**
@@ -218,11 +240,17 @@ Pixhawk1 specifications
 
  .. References
 
-.. [1] `PX4 Autopilot User Guide`_.
+.. [1] `PX4 Autopilot User Guide`_. docs.px4.io
 .. _PX4 Autopilot User Guide: https://docs.px4.io/v1.9.0/en/
 
-.. [2] Eduardo Moura Cirilo Rocha. 2017. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos, Universidade de Brasília, Brasil.
+.. [2] Para mais informações a respeito de `Multithreading (arquitetura computacional)`_.
+.. _Multithreading (arquitetura computacional): https://pt.wikipedia.org/wiki/Multitarefa
 
-.. [3] `Dronecode Platform, Basic Concepts, PX4 Autopilot User Guide`_. 
+.. [3] Eduardo Moura Cirilo Rocha. 2017. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos, Universidade de Brasília, Brasil.
+
+.. [4] `Choosing a Ground Station - Conter documentation`_. ardupilot.org 
+.. _Choosing a Ground Station - Conter documentation: https://ardupilot.org/copter/docs/common-choosing-a-ground-station.html#choosing-a-ground-station
+
+.. [5] `Dronecode Platform, Basic Concepts, PX4 Autopilot User Guide`_. docs.px4.io
 .. _Dronecode Platform, Basic Concepts, PX4 Autopilot User Guide: https://docs.px4.io/v1.9.0/en/getting_started/px4_basic_concepts.html#dronecode
 

@@ -16,7 +16,12 @@ This section contains essential configuration topics:
 .. toctree::
    :maxdepth: 2
 
+   config/QGroundControl
    config/firmware
-   config/airframe 
+   config/airframe
+   config/connection 
    config/mounting
-   config/orientation 
+   config/Compass
+   config/automatic_landing
+
+
