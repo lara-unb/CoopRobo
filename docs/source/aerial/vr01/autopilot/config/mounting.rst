@@ -4,14 +4,14 @@ Mounting the Pixhawk
 .. substituir as imagens por imagens do lab
 
 Autopilot Orientation
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 .. Por padrão, o controlador de voo e a bússola externa devem ser colocados na estrutura da aeronave orientados de modo que a seta aponte para a frente do veículo. Se a placa ou a bússola externa estiverem em qualquer outra orientação, será necessário corrigir a orientação no firmware.
 
 By default, the flight controller and the external compass should be placed on the aircraft frame oriented so that the arrow points towards the front of the vehicle. If the card or external compass are in any other direction, you need to correct the orientation in firmware.
 
 Calculating Orientation
-------------------------
+-----------------------
 
 .. As compensações dos ângulos de rotação `YAW, PITCH e / ou ROLL`_ são calculados em relação à orientação vertical apontando para a frente (rotação no sentido horário em torno dos eixos Z, Y e X, respectivamente). Esse diagrama é chamado de *body frame* (diagrama de corpo) e a orientação padrão é dada por ``ROTATION_NOME``.
 
@@ -29,7 +29,7 @@ For example, the image below shows aircraft rotations around the z axis (YAW), c
     :align: center
 
 Setting the Orientation
--------------------------
+-----------------------
 
 .. Para definir as orientações no firmware: 
 
@@ -70,7 +70,7 @@ To set the orientations on firmware:
 .. _Autopilot Orientation: https://docs.px4.io/v1.9.0/en/config/flight_controller_orientation.html
 
 Vibration Isolation
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 .. As placas Pixhawk possuem acelerômetros e giroscópios embutidos, sendo sensíveis a vibrações. Elevados níveis de vibração podem causar uma série de problemas, incluindo redução do desempenho de voo, voos mais curtos e maior desgaste do veículo. Em casos extremos, a vibração pode levar a falhas dos sensores, resultando em falhas de estimativa ou até mesmo a interrupção do voo.
 
@@ -92,7 +92,7 @@ The Pixhawk must be mounted on the aircraft using the anti-vibration foams inclu
 .. _PX4 user guide > Vibration Isolation: https://docs.px4.io/v1.9.0/en/assembly/vibration_isolation.html#vibration-isolation
 
 More information
------------------
+----------------
 
 * `Advanced Orientation Tuning`_.
 

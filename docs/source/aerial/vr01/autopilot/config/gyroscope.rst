@@ -1,5 +1,5 @@
 Gyroscope calibration
-========================
+=====================
 
 .. Pelo aplicativo QGroundControl será orientado a posicionar o veículo em uma local com uma superfície plana e mantê-lo imóvel na posiçao determinada.
 

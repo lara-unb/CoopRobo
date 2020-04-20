@@ -47,7 +47,7 @@ Each aircraft has two main components that are worth mentioning. One of them is 
    vr01/model/Ranger
 
 References
-------------
+-----------
 
 	* ROCHA, E. M. C. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos. Faculdade de Tecnologia, Universidade de Brasília, 2017. 
 

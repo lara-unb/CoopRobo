@@ -1,5 +1,5 @@
 QGroundControl
-=================
+==============
 
 .. O QGroundControl é uma das principais Estações de Controle em Solo (ECS) disponíveis atualmente a trabalhar com pilotos automáticos compatíveis com MAVLink, incluindo o PX4 e ArduPilot.
 
@@ -14,14 +14,14 @@ To implement this project, QGroundControl was chosen as GCS because it provides 
 Moreover, QGroundControl is one of the most stable ECSs in relation to the others, has a simple and efficient interface and is available in several operating systems, such as Windows, Mac OS X, Linux, Android and iOS.
 
 System Requirements
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 .. O QGroundControl pode ser executado normalmente na maioria dos computadores modernos. Um computador com um i5 e pelo menos 8 GB de RAM terá bom desempenho em todos os aplicativos do programa. Para uma melhor experiência, é aconselhável ter o sistema operacional em sua última versão estável.
 
 QGroundControl can run normally on most modern computers. A computer with an i5 and at least 8 GB of RAM will perform well for all applications in the program. For a better experience, it is advisable to have the operating system in its latest stable version.
 
 Installation
-~~~~~~~~~~~~~
+~~~~~~~~~~~~
 
 -  **Windows**
      

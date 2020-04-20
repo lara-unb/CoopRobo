@@ -1,5 +1,5 @@
 Connections
-============
+===========
 
 .. A imagem abaixo apresenta as conexões dos sensores e demais itens inclusos no Pixhawk. Cada parte será analisada com mais detalhes nas seções a seguir.
 
@@ -9,7 +9,7 @@ The image below shows the connections of the sensors and other items included in
 
 
 Buzzer and Safety Switch
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. A campainha fornece sinais sonoros que indicam a situação do VANT. Enquanto o interruptor atua na segurança da aeronave, bloqueando e desbloqueando os motores.
 
@@ -26,21 +26,21 @@ To connect the buzzer and the safety switch (required items), simply connect the
     :align: center
 
 Slitter I2C
-~~~~~~~~~~~~
+~~~~~~~~~~~
 
 .. O *slitter* I2C expande a quantidade de portas I2C permitindo a conexão de até quatro periféricos ao Piwhawk. Utilize um cabo de 4 fios para conectar o *slitter* I2C e para alimentar uma bússola externa, um display LED, um sensor de velocidade do ar digital e/ou qualquer outro periférico compatível ao veículo.
 
 The I2C slitter expands the number of I2C ports allowing the connection of up to four peripherals to the Piwhawk. Use a 4-wire cable to connect the I2C slitter and to power an external compass, an LED display, a digital air speed sensor and/or any other peripheral compatible to the vehicle.
 
 Airspeed Sensor
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 Em edição...
 
 .. verificar no laboratorio 
 
 GPS + Compass 
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 .. O GPS, outro dispositivo obrigatório, deve ser conectado à porta GPS (6 pinos) usando o cabo de 6 fios fornecidos no kit. A conexão da bússola é opcional, porém recomendamos fortemente sua utilização. Para conecta-lá, ligue um cabo de 4 fios a uma porta I2C do *slitter* I2C, como mostrado abaixo.
 
@@ -83,8 +83,8 @@ For more information on selecting a radio system, receiver compatibility, and co
 
 .. _Remote control transmitters and receivers: https://docs.px4.io/v1.9.0/en/getting_started/rc_transmitter_receiver.html
 
-Telemetry 
-~~~~~~~~~~~
+Telemetry
+~~~~~~~~~
 
 .. Os modens de telemetria podem ser usados ​​para comunicar e controlar um veículo em voo a partir de uma estação terrestre (por exemplo, você pode direcionar o VANT para uma posição específica ou carregar uma nova missão). Um modem deve ser conectado ao seu veículo, como mostrado abaixo. O outro modem deverá ser conectado ao computador da estação terrestre ou dispositivo móvel (geralmente por uma porta USB).
 
@@ -93,7 +93,7 @@ Telemetry modems can be used to communicate and control a vehicle in flight from
 .. image:: /img/Aerial/pixhawk_3dr_telemetry_radio.jpg
 
 Power Module
-~~~~~~~~~~~~~
+~~~~~~~~~~~~
 
 .. O módulo de energia (*Power module* - PM) fornece energia ao controlador de voo da bateria e também envia informações sobre a corrente analógica e a tensão fornecida pelo módulo (incluindo a energia do controlador de voo e dos motores, etc.).
 
@@ -106,7 +106,7 @@ The output of the power module (PM) must be connected to the Pixhawk ** POWER **
 .. image:: /img/Aerial/pixhawk_3dr_power_module.jpg
 
 Distance Sensor
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
 
 .. O Pixhawk suporta vários sensores de distância diferentes, incluindo os Lidars (que usam lasers ou raios infravermelhos para medições de distância) e Sonars (que utilizam som ultrassônico), e também incluem os buscadores de alcance LED Maxbotix Sonar e Pulsed Light. Dessa forma, a instalação varia de dispositivo para dispositivo. Mais informações a respeito da configuração dos sensores pode ser visualizada em `Rangefinders`_.
 
@@ -152,7 +152,7 @@ More details about the connection can be found in `LIDAR-Lite Rangefinder`_.
 .. _LIDAR-Lite Rangefinder: https://ardupilot.org/copter/docs/common-rangefinder-lidarlite.html?highlight=lidar#lidar-lite-rangefinder
 
 More information
------------------
+----------------
 
 * `Pixhawk Wiring Quick Start - PX4 User Guide`_
 
