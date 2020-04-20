@@ -1,5 +1,5 @@
 Airframe
-=========
+========
 
 .. Após a instalação do firmware, é necessário configurar os parâmetros do firmware para a estrutura específica do seu veículo. 
 
@@ -10,7 +10,7 @@ Set the Airframe
 
 .. 1. Com o QGroungControl aberto e o controlador conectado ao computador, selecione o ícone com 3 engrenagens (**Vehicle Setup**) na barra de ferramentas superior e, em seguida, selecione **AirFrame** na barra lateral.
 
-1. With QGroungControl booted and the controller connected to the computer, select the gear icon (**Vehicle Setup**)  in the top toolbar and then select AirFrame in the sidebar.
+1. With QGroungControl booted and the controller connected to the computer, select the gear icon (**Vehicle Setup**)  in the top toolbar and then select **AirFrame** in the sidebar.
 
 .. Adicionar imagem
 
