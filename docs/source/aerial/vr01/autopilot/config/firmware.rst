@@ -3,7 +3,7 @@ Firmware
 
 .. A instalação do *firmware* no hardware do controlador de voo pode ser efetuada de duas formas, pelo uso de um programa de Estação de Controle Terrestre (ECT) ou diretamente pelo uso de ferramentas de desenvolvedor sem o uso de um programa auxiliar. Uma ECT é uma aplicação de *software* que roda em um computador terrestre e se comunica com o veículo pelo uso de telemetria sem fio [1]_. 
 
-The installation of the firmware on the flight controller hardware can be done in two ways, by using an Ground Control Station (GCS) program or directly by using developer tools without using an auxiliary program. An GCS is a software application that runs on a ground computer and communicates with the vehicle through the use of wireless telemetry.
+The installation of the firmware on the flight controller hardware can be done in two ways, by using an Ground Control Station (GCS) program or directly by using developer tools without using an auxiliary program. An GCS is a software application that runs on a ground computer and communicates with the vehicle through the use of wireless telemetry [1]_.
 
 .. As principais ECT's disponíveis são Mission Planner, APM Planner 2, MAVProxy, QGroundControl e UgCS. Para aplicar neste projeto, escolheu-se o QGroundControl por fornecer uso facil e direto para iniciantes, boa documentação, programa mais estável em relação aos demais e ainda oferecer recursos avançados para usuários experientes.
 
@@ -25,8 +25,8 @@ The main GCS's available are Mission Planner, APM Planner 2, MAVProxy, QGroundCo
 
 .. _QGroundControl: https://docs.qgroundcontrol.com/en/
 
-Instalação estável
-~~~~~~~~~~~~~~~~~~~
+Stable installation
+~~~~~~~~~~~~~~~~~~~~
 
 .. Recomenda-se a instalação da versão mais recente do PX4, a fim de obter as correções de bug e as melhores e mais recentes funções.
 
@@ -70,14 +70,17 @@ The firmware will then proceed a several number of upgraee steps (download the n
 
 Once the firmware has completed loading, the device will reboot and reconnect.
  
-Mais informações
-----------------
+More information
+------------------
 
 * `PX4 user guide > Firmware`_.
-.. _PX4 user guide > Firmware: https://docs.px4.io/v1.9.0/en/config/firmware.html
+
 * `QGroundControl user guide > Firmware`_.
-.. _QGroundControl user guide > Firmware: https://docs.qgroundcontrol.com/en/SetupView/Firmware.html
+
 * `PX4 Setup Video`_ (Youtube)
+
+.. _PX4 user guide > Firmware: https://docs.px4.io/v1.9.0/en/config/firmware.html
+.. _QGroundControl user guide > Firmware: https://docs.qgroundcontrol.com/en/SetupView/Firmware.html
 .. _PX4 Setup Video: https://www.youtube.com/watch?v=91VGmdSlbo4&feature=youtu.be
 
 .. References

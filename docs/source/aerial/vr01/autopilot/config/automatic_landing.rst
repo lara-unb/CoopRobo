@@ -27,6 +27,7 @@ After the connection of LIDAR to the system via PWM, some parameters of the auto
 
 The sensor can be tested by QGroundControl, where readings can be observed in **Sonar Range** tab. After setting up the sensor, the autopilot will be able to land the aircraft much more quickly and accurately. The landing takes place by sending the command **Land** to the controller, but for it to occur correctly, the landing strip position must be defined and the landing parameters must be adjusted, such as the speed at which the airplane must land .
 
-Detailed documentation on automatic landings can be found at `Automatic Landing`_.
+.. Note::
+   Detailed documentation on automatic landings can be found at `Automatic Landing`_.
 
 .. _Automatic Landing: . http://ardupilot.org/plane/docs/automatic-landing.html.

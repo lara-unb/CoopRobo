@@ -27,14 +27,12 @@ The complete system is constituted by four sub-systems: three aircraft and a bas
 
 Each aircraft has two main components that are worth mentioning. One of them is the autopilot, a device responsible for the acquisition, conditioning and processing of signals from the aircraft's sensors and for controlling the aircraft's actuators. The other is the embedded computer, responsible for data processing, control of the planes (individual control of each plane or cooperative control between the three planes) and for communication with the others sub-systems through the communication radios.
 
-	
 .. toctree::
    :maxdepth: 2
    :caption: Autopilot
 
    vr01/autopilot/pilot
    vr01/autopilot/config_pilot
-
 	
 .. toctree::
    :maxdepth: 2
@@ -48,23 +46,23 @@ Each aircraft has two main components that are worth mentioning. One of them is 
 
    vr01/model/Ranger
 
-
 References
-----------
+------------
 
-	* ROCHA, E. M. C. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos. Faculdade de Tecnologia, Universidade de Brasília, 2017.
+	* ROCHA, E. M. C. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos. Faculdade de Tecnologia, Universidade de Brasília, 2017. 
 
 	- CORDEIRO, T. F. K. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos. Faculdade de Tecnologia, Universidade de Brasília, 2018.
 
 	* PITA, H. C. Desenvolvimento de sistema de comunicação multiplataforma para veículos aéreos de asa fixa. Faculdade de Tecnologia, Universidade de Brasília, 2018.
 
-	- `PX4 Autopilot User Guide`_ - docs.px4.io
-.. _PX4 Autopilot User Guide: https://docs.px4.io/master/en/index.html
+	- `PX4 Autopilot User Guide`_ - docs.px4.io  
 
 	* `QGroundControl User Guide`_ - qgroundcontrol.com
-.. _QGroundControl User Guide: https://docs.qgroundcontrol.com/en/
 
 	- `Ardupilot Docs`_ - ardupilot.org
+
+.. _PX4 Autopilot User Guide: https://docs.px4.io/master/en/index.html
+.. _QGroundControl User Guide: https://docs.qgroundcontrol.com/en/
 .. _Ardupilot Docs: https://ardupilot.org/copter/index.html
 
 

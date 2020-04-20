@@ -53,7 +53,7 @@ This topic introduces some basics concepts about unmanned aerial vehicles (UAV) 
 
 
 Unmanned Aerial Vehicle (UAV or drone)
----------------------------------------------
+----------------------------------------
 
 .. Um VANT é todo e qualquer tipo de aeronave que pode ser controlada nos 3 eixos de liberdade e não necessita de pilotos embarcados para ser guiado, podendo ser controlado remotamente ou autonomamente.
 
@@ -139,7 +139,7 @@ More information and the list of supported GPS/Compass can be found at `GPS/Comp
 
 
 Airspeed
-------------------
+---------
 ..
    .. Tip::
    Os sensores de velocidade do ar são altamente recomendados para o funcionamento seguro de um VANT asa fixa ou VTOL (*Vertical Take-Off and Landing* - Decolagem e Aterragem Vertical).
@@ -186,7 +186,7 @@ PX4Flow is an optical flow smart camera that can track motion, and has as integr
 
 Most of its applications are directed to rotary-wing aircraft.
 
-Pixhawk specifications
+Pixhawk Specifications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 -  **Processor**
@@ -238,19 +238,23 @@ Pixhawk specifications
    -  4 x Damping Foams
    -  3 x Decals "APM Rover", "APM Copter" and "APM Plane"
 
+More information
+-----------------
+* `Dronecode Platform, Basic Concepts, PX4 Autopilot User Guide`_. docs.px4.io
+
+.. _Dronecode Platform, Basic Concepts, PX4 Autopilot User Guide: https://docs.px4.io/v1.9.0/en/getting_started/px4_basic_concepts.html#dronecode
+
  .. References
 
 .. [1] `PX4 Autopilot User Guide`_. docs.px4.io
-.. _PX4 Autopilot User Guide: https://docs.px4.io/v1.9.0/en/
 
 .. [2] Para mais informações a respeito de `Multithreading (arquitetura computacional)`_.
-.. _Multithreading (arquitetura computacional): https://pt.wikipedia.org/wiki/Multitarefa
 
 .. [3] Eduardo Moura Cirilo Rocha. 2017. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos, Universidade de Brasília, Brasil.
 
 .. [4] `Choosing a Ground Station - Conter documentation`_. ardupilot.org 
-.. _Choosing a Ground Station - Conter documentation: https://ardupilot.org/copter/docs/common-choosing-a-ground-station.html#choosing-a-ground-station
 
-.. [5] `Dronecode Platform, Basic Concepts, PX4 Autopilot User Guide`_. docs.px4.io
-.. _Dronecode Platform, Basic Concepts, PX4 Autopilot User Guide: https://docs.px4.io/v1.9.0/en/getting_started/px4_basic_concepts.html#dronecode
+.. _PX4 Autopilot User Guide: https://docs.px4.io/v1.9.0/en/
+.. _Multithreading (arquitetura computacional): https://pt.wikipedia.org/wiki/Multitarefa
+.. _Choosing a Ground Station - Conter documentation: https://ardupilot.org/copter/docs/common-choosing-a-ground-station.html#choosing-a-ground-station
 

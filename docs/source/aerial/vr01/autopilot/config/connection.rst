@@ -1,5 +1,5 @@
 Connections
-==========
+============
 
 .. A imagem abaixo apresenta as conexões dos sensores e demais itens inclusos no Pixhawk. Cada parte será analisada com mais detalhes nas seções a seguir.
 
@@ -9,7 +9,7 @@ The image below shows the connections of the sensors and other items included in
 
 
 Buzzer and Safety Switch
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. A campainha fornece sinais sonoros que indicam a situação do VANT. Enquanto o interruptor atua na segurança da aeronave, bloqueando e desbloqueando os motores.
 
@@ -33,7 +33,7 @@ Slitter I2C
 The I2C slitter expands the number of I2C ports allowing the connection of up to four peripherals to the Piwhawk. Use a 4-wire cable to connect the I2C slitter and to power an external compass, an LED display, a digital air speed sensor and/or any other peripheral compatible to the vehicle.
 
 Airspeed Sensor
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 Em edição...
 
@@ -93,7 +93,7 @@ Telemetry modems can be used to communicate and control a vehicle in flight from
 .. image:: /img/Aerial/pixhawk_3dr_telemetry_radio.jpg
 
 Power Module
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 .. O módulo de energia (*Power module* - PM) fornece energia ao controlador de voo da bateria e também envia informações sobre a corrente analógica e a tensão fornecida pelo módulo (incluindo a energia do controlador de voo e dos motores, etc.).
 
@@ -106,7 +106,7 @@ The output of the power module (PM) must be connected to the Pixhawk ** POWER **
 .. image:: /img/Aerial/pixhawk_3dr_power_module.jpg
 
 Distance Sensor
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 .. O Pixhawk suporta vários sensores de distância diferentes, incluindo os Lidars (que usam lasers ou raios infravermelhos para medições de distância) e Sonars (que utilizam som ultrassônico), e também incluem os buscadores de alcance LED Maxbotix Sonar e Pulsed Light. Dessa forma, a instalação varia de dispositivo para dispositivo. Mais informações a respeito da configuração dos sensores pode ser visualizada em `Rangefinders`_.
 
@@ -127,7 +127,7 @@ To implement the project, the Lidar sensor was chosen to enable the automatic la
 
 .. De acordo com a documentação do Pixhawk, o lidar utilizado apresenta problemas de interferência com outros dispositivos quando conectado na porta I2C. Assim, escolheu-se a conexão por PWM. Um diagrama de conexão pode ser vista na tabela abaixo e o esquema de montagem pode ser visto na figura a seguir, onde o valor do resistor pode variar entre 200Ω e 1kΩ [1]_.
 
-According to the Pixhawk documentation, the Lidar used presents interference problems with other devices when connected to the I2C port. Thus, the PWM connection was chosen. A connection diagram can be seen in the table below and the assembly diagram can be seen in the following figure, where the value of the resistor can vary between 200Ω and 1kΩ [1] _.
+According to the Pixhawk documentation, the Lidar used presents interference problems with other devices when connected to the I2C port. Thus, the PWM connection was chosen. A connection diagram can be seen in the table below and the assembly diagram can be seen in the following figure, where the value of the resistor can vary between 200Ω and 1kΩ [1]_.
 
 .. table:: Connection diagram between Lidar and Pixhawk
 
@@ -151,20 +151,20 @@ More details about the connection can be found in `LIDAR-Lite Rangefinder`_.
 
 .. _LIDAR-Lite Rangefinder: https://ardupilot.org/copter/docs/common-rangefinder-lidarlite.html?highlight=lidar#lidar-lite-rangefinder
 
-
 More information
 -----------------
 
 * `Pixhawk Wiring Quick Start - PX4 User Guide`_
-.. _Pixhawk Wiring Quick Start - PX4 User Guide: https://docs.px4.io/v1.9.0/en/assembly/quick_start_pixhawk.html
 
 * `Basic Assembly - PX4 User Guide`_
-.. _Basic Assembly - PX4 User Guide: https://docs.px4.io/v1.9.0/en/assembly/
 
 * `Pixhawk Series - PX4 User Guide`_
-.. _Pixhawk Series - PX4 User Guide: https://docs.px4.io/v1.9.0/en/flight_controller/pixhawk_series.html
 
 * `Peripheral Hardware - Ardupilot Docs`_
+
+.. _Pixhawk Wiring Quick Start - PX4 User Guide: https://docs.px4.io/v1.9.0/en/assembly/quick_start_pixhawk.html
+.. _Basic Assembly - PX4 User Guide: https://docs.px4.io/v1.9.0/en/assembly/
+.. _Pixhawk Series - PX4 User Guide: https://docs.px4.io/v1.9.0/en/flight_controller/pixhawk_series.html
 .. _Peripheral Hardware - Ardupilot Docs: https://ardupilot.org/copter/docs/common-optional-hardware.html
 
 .. References

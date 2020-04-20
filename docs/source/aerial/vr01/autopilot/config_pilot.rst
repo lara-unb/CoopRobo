@@ -22,6 +22,7 @@ This section contains essential configuration topics:
    config/connection 
    config/mounting
    config/Compass
+   config/gyroscope
    config/automatic_landing
 
 

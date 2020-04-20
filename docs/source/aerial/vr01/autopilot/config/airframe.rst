@@ -33,9 +33,8 @@ Mais informações
 ----------------
 
 * `PX4 user guide > Airframe`_.
-.. _PX4 user guide > Airframe: https://docs.px4.io/v1.9.0/en/config/airframe.html 
+
 * `QGroundControl user guide > Airframe`_.
+
+.. _PX4 user guide > Airframe: https://docs.px4.io/v1.9.0/en/config/airframe.html 
 .. _QGroundControl user guide > Airframe: https://docs.qgroundcontrol.com/en/SetupView/airframe_px4.html
-
-
-
