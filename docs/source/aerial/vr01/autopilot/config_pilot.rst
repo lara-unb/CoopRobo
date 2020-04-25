@@ -1,5 +1,5 @@
 Autopilot Configuration
-==================================
+=======================
 
 .. https://docs.px4.io/v1.9.0/en/config/
 
@@ -22,6 +22,7 @@ This section contains essential configuration topics:
    config/connection 
    config/mounting
    config/Compass
+   config/gyroscope
    config/automatic_landing
 
 

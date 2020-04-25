@@ -6,7 +6,7 @@ Airframe
 After installing the firmware, is necessary to configure the firmware parameters for the specific structure of your vehicle.
 
 Set the Airframe
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 .. 1. Com o QGroungControl aberto e o controlador conectado ao computador, selecione o ícone com 3 engrenagens (**Vehicle Setup**) na barra de ferramentas superior e, em seguida, selecione **AirFrame** na barra lateral.
 
@@ -33,9 +33,8 @@ Mais informações
 ----------------
 
 * `PX4 user guide > Airframe`_.
-.. _PX4 user guide > Airframe: https://docs.px4.io/v1.9.0/en/config/airframe.html 
+
 * `QGroundControl user guide > Airframe`_.
+
+.. _PX4 user guide > Airframe: https://docs.px4.io/v1.9.0/en/config/airframe.html 
 .. _QGroundControl user guide > Airframe: https://docs.qgroundcontrol.com/en/SetupView/airframe_px4.html
-
-
-
