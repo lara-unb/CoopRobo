@@ -106,10 +106,12 @@ Control Box
       :scale: 100 %
       :align: center
 
-The Controller Box contains both digitl and analog input and output sockets which can be used for interfacing other components or system components itself. The teach pendant can be used to program the robot as per the requirement of user and can be based on inputs and outputs.
+The Controller Box contains both digital and analog input and output sockets which can be used for interfacing other components or system components itself. The teach pendant can be used to program the robot as per the requirement of user and can be based on inputs and outputs.
 
 Using this Controller Box, the robot can be set up quickly without programming experience using patent technology and can be operated with an 3D intuitive visualization. It requires a simple movement of the robotic arm by giving waypoints or from the controls given on the touchpad.
 
 
 Linux PC
 ~~~~~~~~
+
+Alternatively to Control Box, it is possible to control the robot system from a Linux PC. Using ROS and ensuring that your hardware, computer and robot, are properly configured to talk to each other, it is feasible to perform any movement or path directly from your PC, as good, or better, as from Control Box.
