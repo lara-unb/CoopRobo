@@ -28,6 +28,7 @@ UR3
    :caption: Software
 
    ur3/soft/ros
+   ur3/soft/controlsys
 
 .. toctree::
    :maxdepth: 1
