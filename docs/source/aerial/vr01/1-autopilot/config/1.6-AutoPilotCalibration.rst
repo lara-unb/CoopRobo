@@ -1,0 +1,14 @@
+AutoPilot Calibration
+======================
+
+This section contains the main autopilot calibration topics:
+
+.. toctree::
+   :maxdepth: 2
+   
+   1.6-calibration/1.6.1-Compass
+   1.6-calibration/1.6.2-gyroscope
+   1.6-calibration/1.6.3-accelerometer
+   1.6-calibration/1.6.4-AirSpeed
+   1.6-calibration/1.6.5-Radio
+

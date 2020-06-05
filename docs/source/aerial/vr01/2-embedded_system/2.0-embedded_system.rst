@@ -1,0 +1,28 @@
+Embedded System
+===============
+
+.. Um computador embarcado deverá adicionado à cada aeronave de modo a comunicar-se com o piloto automático Pixhawk e com os computadores embarcados nas demais aeronaves através de um modem responsável por receber e transmitir informações. O microprocessador deverá processar as informações obtidas através do modem e repassar instruções ao piloto automático Pixhawk. 
+
+An embedded computer must be added to each aircraft in order to communicate with the Pixhawk autopilot and with the computers embedded in the other aircraft through a modem responsible for receiving and transmitting information. The microprocessor must process the information obtained through the modem and pass on instructions to the Pixhawk autopilot.
+
+.. Computadores embarcados são sistemas microprocessados digitais no qual o computador é inteiramente encapsulado ou dedicado ao sistema que ele controla. Diferentemente de computadores de finalidade geral, como o computador pessoal, um sistema embarcado realiza um conjunto de tarefas predefinidas, geralmente com requisitos específicos. A predefinição das atividades a serem realizadas permite que os computadores embarcados possuam menor tamanho, peso, preço e capacidade de processamento do que computadores comuns que desempenham funções similares. 
+
+Embedded computers are digital microprocessed systems in which the computer is entirely encapsulated or dedicated to the system it controls. Unlike general-purpose computers, such as the personal computer, an embedded system performs a set of predefined tasks, usually with specific requirements. The predefined activities to be carried out allow the embedded computers to have a smaller size, weight, price and processing capacity than ordinary computers that perform similar functions.
+
+.. Entretanto, existem desvantagens em sua aplicação devido o mesmo motivo que os tornam atrativos. Por serem bem específicos geralmente estes dispositivos não podem ter sua função inicial alterada sem mudar boa parte de seu software ou estrutura do hardware, em alguns casos estes dispositivos chegam a não apresentar interface com o usuário. 
+
+However, there are disadvantages in its application due to the same reason that make them attractive. Because they are very specific, these devices cannot change their initial function without changing a good part of their software or hardware structure, in some cases these devices do not even have a user interface.
+
+.. Neste capítulo será explicitado os primeiros passos e procedimentos que tiveram de ser realizados para operar o microprocessador.
+
+This chapter will explain the first steps and procedures that had to be performed to operate the microprocessor.
+
+
+.. toctree::
+   :maxdepth: 2
+
+   2.1-embedded_hardware
+   2.2-embedded_software
+   2.3-SO_install
+   2.4-connect_gumstix
+
