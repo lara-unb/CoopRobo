@@ -1,2 +1,0 @@
-Ranger EX Volatex RC
-====================

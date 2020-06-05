@@ -1,0 +1,7 @@
+Using the embedded computer
+===========================
+
+.. Neste capítulo serão discutidos conhecimentos básicos necessários para a manipulação do computador embarcado Gumstix Overo, do sistema operacional linux e do sistema operacional específico instalado e, posteriormente, são realizados testes do GPIO e da comunicação serial do computador embarcado. As informações descritas nessas etapas são essenciais para a compreensão de diversos topicos e serão utilizadas ao longo do trabalho.
+
+In this chapter, basic knowledge necessary for handling the embedded computer Gumstix Overo, the Linux operating system and the specific operating system installed will be discussed and, later, tests of the GPIO and serial communication of the embedded computer will be carried out. The information described in these steps is essential for understanding different topics and will be used throughout the work.
+

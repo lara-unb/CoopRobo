@@ -31,40 +31,49 @@ Each aircraft has two main components that are worth mentioning. One of them is 
    :maxdepth: 2
    :caption: Autopilot
 
-   vr01/autopilot/pilot
-   vr01/autopilot/config_pilot
+   vr01/1-autopilot/1.0-pilot
+   vr01/1-autopilot/1.1-config_pilot
 	
 .. toctree::
    :maxdepth: 2
    :caption: Embedded computer
 
-   vr01/embedded_system/system
+   vr01/2-embedded_system/2.0-embedded_system
 
 .. toctree::
    :maxdepth: 2
-   :caption: Modeling
+   :caption: Using the embedded computer
 
-   vr01/model/Ranger
+   vr01/3-gumstix/3.0-intro
 
 References
------------
+----------
 
-	* ROCHA, E. M. C. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos. Faculdade de Tecnologia, Universidade de Brasília, 2017. 
+* ROCHA, E. M. C. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos. Faculdade de Tecnologia, Universidade de Brasília, 2017.
 
-	- CORDEIRO, T. F. K. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos. Faculdade de Tecnologia, Universidade de Brasília, 2018.
+* CORDEIRO, T. F. K. Desenvolvimento de um sistema com veículos aéreos não-tripulados autônomos. Faculdade de Tecnologia, Universidade de Brasília, 2018.
 
-	* PITA, H. C. Desenvolvimento de sistema de comunicação multiplataforma para veículos aéreos de asa fixa. Faculdade de Tecnologia, Universidade de Brasília, 2018.
+* PITA, H. C. Desenvolvimento de sistema de comunicação multiplataforma para veículos aéreos de asa fixa. Faculdade de Tecnologia, Universidade de Brasília, 2018.
 
-	- `PX4 Autopilot User Guide`_ - docs.px4.io  
+* `PX4 Autopilot User Guide`_ - docs.px4.io
 
-	* `QGroundControl User Guide`_ - qgroundcontrol.com
+* `QGroundControl User Guide`_ - qgroundcontrol.com
 
-	- `Ardupilot Docs`_ - ardupilot.org
+* `Ardupilot Docs`_ - ardupilot.org
 
+* `RT-MaG Project`_ - gipsa-lab.fr
+
+* `Yocto Project`_ - yoctoproject.org
+
+* `Getting Started - Gumstix COM`_ - gumstix.com
+
+* `Gumstix, Inc - GitHub`_ - github.com
+   
+
+.. _Gumstix, Inc - GitHub: https://github.com/gumstix
+.. _Getting Started - Gumstix COM: https://www.gumstix.com/support/getting-started
+.. _RT-MaG Project: http://www.gipsa-lab.fr/projet/RT-MaG/
+.. _Yocto Project: https://www.yoctoproject.org/
 .. _PX4 Autopilot User Guide: https://docs.px4.io/master/en/index.html
 .. _QGroundControl User Guide: https://docs.qgroundcontrol.com/en/
 .. _Ardupilot Docs: https://ardupilot.org/copter/index.html
-
-
-
-

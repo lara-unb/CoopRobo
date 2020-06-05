@@ -1,0 +1,84 @@
+Installing the Operating System
+===============================
+
+.. A instalação do sistema operacional não é uma tarefa trivial, além disso existe uma escassez de documentação detalhada e completa que explique como instalar o sistema operacional no computador embarcado, logo será documentado nesta seção os procedimentos necessários para a instalação de um sistema operacional. Na fase atual dos trabalhos instalamos ambos os sistemas, de tal forma, podemos decidir posteriormente qual dos dois sistemas será melhor para nossa aplicação. 
+
+The installation of the operating system is not a trivial task, in addition there is a shortage of detailed and complete documentation explaining how to install the operating system on the embedded computer, soon the procedures necessary for installing an operating system will be documented in this section. In the current phase of the work, we installed both systems, so that we can decide later which of the two systems will be best for our application.
+
+.. Note:: 
+   Official tutorials can be found on the `Gumstix`_ website and on the GitHub repositories of the `Yocto`_ and `Ubuntu`_ project for Gumstix products.
+
+.. _Gumstix: https://www.gumstix.com/
+.. _Yocto: https://github.com/gumstix/yocto-manifest
+.. _Ubuntu: https://github.com/gumstix/live-build
+
+Obtaining OS images
+~~~~~~~~~~~~~~~~~~~
+
+.. https://github.com/gumstix/yocto-manifest/blob/warrior/README.md
+
+.. Essencialmente o dispositivo precisa apenas executar um pequeno programa, geralmente localizado em uma memória não volátil do tipo *Read-Only Memory* (ROM), para acessar a outro dispositivo de memória não volátil que armazene o sistema operacional, e carregar o sistema operacional na memória volátil de rápido acesso ou *Random Access Memory* (RAM) onde ele poderá ser executado. Em sistemas mais robustos ocorre, na verdade, um encadeamento desses pequenos programas, chamados de *bootloaders*, onde um primeiro estágio executa um segundo estágio que carrega programas mais complexos e, por sua vez, executa um terceiro estágio e assim por diante até que o sistema operacional seja completamente carregado e esteja pronto para ser executado por si só.
+
+Essentially, the device only needs to run a small program, usually located in a non-volatile memory of the type *Read-Only Memory* (ROM), to access another non-volatile memory device that stores the operating system, and load the operating system on volatile quick access memory or *Random Access Memory* (RAM) where it can be executed. In more robust systems, there is, in fact, a chain of these small programs, called *bootloaders*, where a first stage executes a second stage that loads more complex programs and, in turn, executes a third stage and so on until the operating system is fully loaded and ready to run on its own.
+
+.. Existem dois métodos para obter os sistemas operacionais para o Gumstix Overo. O primeiro método é baixar uma imagem pré-compilada diretamente do Gumstix. O segundo método é construir você mesmo a imagem em seu computador. A criação manual da imagem do sistema operacional possui benefícios adicionais, como personalização ou adição de pacotes binários adicionais à sua imagem base. A possibilidade de personalização será muito importante no desenvolvimento do projeto.
+
+There are two methods for obtaining the operating systems for Gumstix Overo. The first method is to download a precompiled image directly from Gumstix. The second method is to build the image on your computer yourself. Creating the operating system image manually has additional benefits, such as customizing or adding additional binary packages to your base image. The possibility of personalization will be very important in the development of the project.
+
+	.. toctree::
+	   :maxdepth: 2
+
+	   2.3.1-yocto_image
+
+.. ubuntu/ubuntu_image
+
+Preparing the Memory Card
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. Uma vez obtida a imagem do sistema operacional podemos transferir os arquivos para o computador embarcado para, enfim, ligá-lo. Essa tarefa será realizada por meio de um cartão SD que funcionará como o disco rígido do computador embarcado. Logo, o cartão SD irá conter tanto os programas necessários para boot, que serão utilizados apenas na inicialização do computador, quanto os outros programas podem ser utilizados a qualquer momento e realizarão modificações constantes no cartão SD. Portanto a melhor maneira de lidar com essa divisão é particionar o cartão SD em duas partições que serão denominadas boot e rootfs.
+
+Once the image of the operating system is obtained, we can transfer the files to the embedded computer in order to connect it. This task will be performed using an SD card that will act as the hard disk of the embedded computer. Therefore, the SD card will contain both the programs needed for boot, which will be used only when starting the computer, and the other programs can be used at any time and will make constant changes to the SD card. So, the best way to deal with this division is to partition the SD card into two partitions that will be called boot and rootfs.
+
+.. O sistema de gestão de arquivos define o método que o sistema operacional irá utilizar para armazenar nos espaços de memória os arquivos e suas informações, ou metadados dos arquivos, como nome, espaço de memória ocupado, datas de alterações e últimos acessos. Existe uma grande variedade de sistemas de gestão de arquivos com as mais diversas complexidades. Mas o que podemos precisar nesse trabalho e em trabalhos futuros é o sistema "FAT", um sistema antigo geralmente utilizado em mídias e, normalmente, universal. Já o "ext" é um sistema elaborado especificamente para o Linux e não é possível acessá-lo por um outro sistema operacional sem um programa para essa finalidade.
+
+The file management system defines the method that the operating system will use to store files and their information, or file metadata, in memory spaces, such as name, occupied memory space, dates of changes and last accesses. There is a wide variety of file management systems with the most diverse complexities. But what we may need in this work and in future works is the "FAT" system, an old system generally used in media and, usually, universal. "Ext" is a system designed specifically for Linux and it is not possible to access it from another operating system without a program for this purpose.
+
+.. Esse é um procedimento muito comum e existem inúmeras maneiras de fazê-lo, entretanto, aqui utilizaremos o proprio gerenciador de discos do Linux para realizar o particionamento, por ser uma ferramenta simples, intuitiva e possibilitar futuras modificações sem grandes dificuldades. Vale ressaltar que este não é o metodo indicado pelo fabricante, já que os procedimentos recomendados por eles na pagina `Create Bootable MicroSD Card`_ apresentaram os mais diversos erros, todavia, os resultados obtidos utilizando os procedimentos do topico abaixo são os mesmos.  
+
+This is a very common procedure and there are numerous ways to do it, however, here we will use Linux's own disk manager to perform partitioning, as it is a simple, intuitive tool and allows for future changes without major difficulties. It is worth mentioning that this is not the method indicated by the manufacturer, since the procedures recommended by them on the page `Create Bootable MicroSD Card`_ presented the most diverse errors, however, the results obtained using the procedures of the topic below are the same.
+
+.. _Create Bootable MicroSD Card : https://www.gumstix.com/support/getting-started/create-bootable-microsd-card
+
+	.. toctree::
+	   :maxdepth: 2
+
+	   2.3.2-Partitioning_SD
+	   
+Writing the image on the MicroSD Card
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	  
+
+.. Após dividido o cartão SD podemos prosseguir com a instalação do sistema montando suas partições e copiando os arquivos obtidos anteriormente, os dois arquivos bootloaders, para a pasta em que a partição de boot foi montada e extraindo os diretórios do sistema para a pasta em que a partição rootfs foi montada. Depois disso, 
+
+After dividing the SD card, we can proceed with the installation of the system by mounting its partitions and copying the files obtained previously, the two bootloaders files, to the folder where the boot partition was mounted and extracting the system directories to the folder where the rootfs partition has been mounted. 
+
+.. O procedimento de montagem de uma partição de memória consiste em uma atividade do sistema operacional para garantir que a transferência de informação será feita da maneira correta, basicamente o dispositivo conectado é lido por inteiro para identificar os arquivos nele armazenados e aonde podem ser escritas novas informações sem que haja sobreposição de dados. Porém mais importante que a montagem da partição é desmontar a partição antes de desconectar o periférico, pois garante que nenhuma atividade de escrita na partição esteja ocorrendo no momento que o dispositivo for removido. Esse procedimento garante, também, que todas as alterações solicitadas tenham sido feitas no periférico e não estejam salvas em arquivos temporários ou buffers do sistema. 
+
+After that, the procedure for mounting a memory partition is an activity of the operating system to ensure that the transfer of information will be done correctly, basically the connected device is read in its entirety to identify the files stored in it and where new information can be written to without overlapping data. However more important than mounting the partition is to unmount the partition before disconnecting the peripheral, as it ensures that no write activity on the partition is taking place at the time the device is removed. This procedure also ensures that all requested changes have been made on the peripheral and are not saved in temporary files or system buffers.
+
+.. O procedimento descrito a seguir é baseado nas recomendações do fabricante e são especificas para a instalação do sistema Yocto Project em dispositivos Gumstix Overo.
+
+The procedure described below is based on the manufacturer's recommendations and is specific for installing the Yocto Project system on Gumstix Overo devices.
+
+.. Tip::
+	Remember to unmount the partitions before removing the SD card.
+	
+.. toctree::
+	   :maxdepth: 2
+
+	   2.3.3-Mounting_Partitions	
+
+References
+----------
+
+	* PITA, H. C. Desenvolvimento de sistema de comunicação multiplataforma para veículos aéreos de asa fixa. Faculdade de Tecnologia, Universidade de Brasília, 2018.
+
