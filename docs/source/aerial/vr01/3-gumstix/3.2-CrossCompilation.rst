@@ -1,0 +1,159 @@
+Cross-compilation
+=================
+
+.. A compilação cruzada ocorre quando um dispositivo compila um código fonte para uma plataforma diferente daquela que compilou o código, geralmente temos um ambiente de desenvolvimento que está em uma arquitetura diferente da arquitetura da placa em que vamos rodar nosso programa. Para que nossos notebooks ou desktops possam gerar um binário, programa que rode em outra arquitetura, acontece o *Cross Compile* (Compilação Cruzada, da tradução direta do inglês). Por exemplo, em nosso caso, um computador com Linux Ubuntu, utilizando um processador Intel ou AMD com arquitetura x86, irá compilar um código para o computador embarcado rodando um sistema Linux adaptado rodando em uma arquitetura completamente diferente.
+
+Cross-compilation occurs when a device compiles source code for a different platform than the one that compiled the code, we usually have a development environment that is in an architecture different from the architecture of the board on which we will run our program. So that our notebooks or desktops can generate a binary, a program that runs on another architecture, there is the Cross Compilation. For example, in our case, a computer with Linux Ubuntu, using an Intel or AMD processor with x86 architecture, will compile code for the embedded computer running an adapted Linux system running on a completely different architecture.
+
+.. Utilizar a compilação cruzada para trabalhar com sistemas embarcados é muito comum, principalmente quando estes não possuem capacidade de processamento para suportar um compilador. Para nós seria possível compilar no próprio sistema embarcado, porém, apesar de os recursos não serem tão limitados assim, não queremos desperdiça-los. Além disso programar em um computador regular com a disposição de diversos tipos de IDE diferentes é muito melhor do que programar em um computador embarcado com recursos de interface limitadas.
+
+Using cross-compilation to work with embedded systems is very common, especially when they do not have the processing capacity to support a compiler. For us, it would be possible to compile in the embedded system itself, however, although the resources are not so limited, we do not want to waste them. In addition, programming on a regular computer with several different IDE types is much better than programming on an embedded computer with limited interface capabilities.
+
+.. Para realizarmos esse processo de compilação cruzada precisamos primeiro obter um *software development kit*, também conhecido como Kit de desenvolvimento de software, SDK ou *devkit*. O SDK nada mais é que um conjunto de ferramentas de desenvolvimento de software que possibilita a criação e compilação dos softwares para um sistema diferente. 
+
+To accomplish this cross-compilation process must first obtain a Software Development Kit, also known as SDK or devkit. The SDK is nothing more than a set of software development tools that make it possible to create and compile software for a different system.
+
+Installing the SDK
+~~~~~~~~~~~~~~~~~~
+
+.. Note:: 
+    The Yocto project offers a tutorial on how to obtain and install the SDK for your system on the GitHub `Cross Compile with Yocto SDK`_ page. However, all the procedures performed and the results obtained in the installation will be described in this topic.
+
+.. _Cross Compile with Yocto SDK: https://github.com/gumstix/yocto-manifest/wiki/Cross-Compile-with-Yocto-SDK
+
+.. Para obter o SDK para a imagem do sistema operacional que estamos utilizando basta executar os procedimentos a seguir:
+
+To obtain the SDK for the image of OS we are using, simply perform the following procedures:
+
+1. **Creation of directories**
+
+.. Criaremos um diretório chamado **workspace** onde você não apenas instalará o SDK, mas também compilará o código de exemplo. Escolha um local conveniente para você e execute os comandos. 
+
+We will create a directory called **workspace** where you will install the SDK and compile the codes in the future. Choose a location convenient for you and execute the commands.
+
+::
+
+    $ mkdir workspace
+    $ cd workspace
+    $ wget http://gumstix-yocto.s3.amazonaws.com/sdk.sh
+
+
+.. figure:: /img/Aerial/sdk_download.png
+	:align: center
+
+.. O comando ``wget`` irá efetuar download do SDK para sistemas Gumstix. Esse processo pode demorar um pouco, a depender da sua velocidade de download.
+
+.. Note::
+        The ``wget`` command will download the SDK for Gumstix systems. This process may take a while, depending on your download speed.
+
+2. **Checking permissions**
+
+.. Após o fim do download, verifique as permissões do arquivo executando o comando ``ls -la sdk.sh``. Se o terminal retornar que há permissão para executar este arquivo, pule para o próximo procedimento. Caso contrário, será necessário alterar as permissões do arquivo através do comando ``chmod``. 
+
+After the download is complete, check the file permissions by running the command ``ls -la sdk.sh``. If the terminal returns that you are allowed to run this file, skip to the next procedure. Otherwise, you will need to change the file's permissions using the ``chmod`` command.
+
+.. Relembrando, os três primeiras espaços indicam as permissões do dono e, basicamente, temos 3 permissões básicas, "r", "w" e "x" indicando permissão para leitura, escrita e execução, respectivamente. 
+
+.. Note::
+    Recalling, the first three spaces indicate the owner's permissions and, basically, we have 3 basic permissions, **r**, **w** and **x**, indicating permission to read, white and execute, respectively.
+
+.. Por exemplo, na imagem abaixo, o arquivo possui permissão para leitura e escrita, mas não pode ser executado.
+
+For example, in the image below, the file has read and white permission, but cannot be executed.
+
+.. figure:: /img/Aerial/sdk_permission.png
+	:align: center
+
+.. Para adicionar a permissão para execução, basta executar o comando ``chmod +x sdk.sh``.
+
+To add the permission to run, just execute command ``chmod +x sdk.sh``.
+
+.. figure:: /img/Aerial/sdk_permission2.png
+	:align: center
+
+3. **Installation**
+
+.. Para iniciar a instalação, execute o arquivo *sdk.sh*. Assim que solicitado, digite o diretório que deseja instalar o SDK (recomendamos a criação de um repositório chamado *sdk*) e confirme.
+
+To start the installation, run the *sdk.sh* file. Once prompted, enter the directory you want to install the SDK in (we recommend creating a repository called *sdk*) and confirm.
+::
+
+    $ ./sdk.sh
+
+.. figure:: /img/Aerial/sdk_install.png
+	:align: center
+
+.. comentar erros
+
+4. **Setting up the environment**
+
+.. A instalação do SDK irá gerar uma pasta com o conteúdo apresentado na figura abaixo.
+
+Installing the SDK will generate a folder with the content shown in the figure below. 
+
+.. figure:: /img/Aerial/sdk_ls.png
+	:align: center
+
+.. O diretório "sysroot" contém os arquivos raiz dos dois sistemas, tanto do sistema que irá compilar o código quanto do sistema que irá executar o programa, e o primeiro arquivo da lista importa os endereços e variáveis importantes para a compilação do código.
+
+.. Note::
+    The "sysroot" directory contains the root files of the two systems, both the system that will compile the code and the system that will run the program, and the first file in the list imports the adrdresses and variables important for compiling the code.
+
+.. Para podermos prosseguir com a compilação do código é necessária a execução da seguinte linha de comando:
+
+In order to proceed with the compilation of the code it, is necessary to execute the following command line: 
+
+::
+
+    source sdk/environment-setup-cortexa8hf-neon-poky-linux-gnueabi
+
+.. figure:: /img/Aerial/sdk_source.png
+	:align: center
+
+Compiling Hello World
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. Uma vez realizada a instalação, podemos testar a compilação cruzada criando um simples script. Vamos criar um arquivo no editor de texto chamado *helloworld.c*, colar o código abaixo e salvar no diretório *workspace*.
+
+Once the installation is done, we can test the cross-compilation by creating a simple script. Let's create a file in the text editor called "helloworld.c", paste the code below and save it in the **workspace directory**.
+
+::
+
+    #include <stdio.h>
+    int main(void)
+        {
+        printf ("Hello World!\n");
+        return 0;
+        }
+
+.. Agora podemos executar o comando ``make <nome_do_código>`` para criar um arquivo binário executável do *helloworld.c*. 
+
+We can now run the command ``make <code_name>`` to create an executable binary file from *helloworld.c*.
+
+.. figure:: /img/Aerial/sdk_compile.png
+	:align: center
+
+.. O comando "make" é na verdade a simplificação de uma extensa linha de comando que chama um compilador **arm-poky-Linux-gnueabi-gcc** e dá a ele os parâmetros contidos na pasta SDK. Tudo isso graças ao comando "source" utilizado anteriormente.
+
+.. Note:: 
+    The ``make`` command is actually a simplification of an extensive command line that calls a **arm-poky-Linux-gnueabi-gcc** compiler and gives it the parameters contained in the SDK folder. All this thanks to the "source" command previously used.
+
+.. Uma vez obtido o executável do código basta copiá-lo para uma das pastas do cartão de memória transferi-lo para o Overo e executá-lo. Lembre-se que o diretório principal é o diretório ``/home/root/``, então se o arquivo for colocado dentro deste diretório será bem fácil encontra-lo.
+
+Once the code executable is obtained, just copy it to one of the memory card folders and transfer it to Overo and execute it. Remember that the main directory is the ``/home/root/`` directory, so if the file is placed inside this directory it will be very easy to find it.
+
+.. Depois de inserido o cartão de memória no Overo, podemos inicia-lo normalmente. Quando iniciado, vamos até o diretório em que o programa foi salvo e o executamos com o comando ``./nome_do_código``. Se tudo ocorrer bem, o programa deverá ser executado, similar a figura abaixo.
+
+After inserting the memory card in Overo, we can start it normally. When started, we go to the directory where the program was saved and run it with the command ``./helloworld``. If everything goes well, the program should be executed, similar to the figure below.
+
+.. figure:: /img/Aerial/sdk_compile2.png
+	:align: center
+
+References
+-----------
+
+* PITA, H. C. Desenvolvimento de sistema de comunicação multiplataforma para veículos aéreos de asa fixa. Faculdade de Tecnologia, Universidade de Brasília, 2018.
+
+* `Cross Compile with Yocto SDK`_ - github.com/gumstix
+
+.. _Cross Compile with Yocto SDK: https://github.com/gumstix/yocto-manifest/wiki/Cross-Compile-with-Yocto-SDK
