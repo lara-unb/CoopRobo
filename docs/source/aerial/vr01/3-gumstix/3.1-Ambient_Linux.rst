@@ -1,0 +1,378 @@
+Getting used to Linux
+=====================
+
+.. Realizados os procedimentos apresentados na seção anterior de forma correta, o computador embarcado operará com um sistema operacional Linux muito semelhante ao que estamos habituados em computadores regulares. Logo, podemos realizar alguns procedimentos simples para que possamos explorar e nos habituar um pouco o ambiente ao qual vamos trabalhar. O que será demostrado nessa etapa são procedimentos, comandos e informações padrão dos sistemas Linux executados no computador embarcado Gumstix Overo WaterStorm.
+
+Having performed the procedures presented in the previous section correctly, the embedded computer will operate with a Linux operating system very similar to what we are used to on regular computers. Therefore, we can perform some simple procedures so that we can explore and get a little used to the environment in which we will work. What will be demonstrated in this step are standard procedures, commands and information for Linux systems running on the Gumstix Overo WaterStorm embedded computer.
+
+.. Caso o leitor já esteja habituado ao ambiente de trabalho Linux recomenda-se pular para a próxima seção.
+
+.. Tip::
+    If the reader is already used to the Linux desktop, it is recommended to skip to the next section.
+
+Command Lines
+~~~~~~~~~~~~~
+
+.. Começaremos o processo de ambientação apresentando linhas de comando básicas que vão ajuda-lo a utilizar o sistema operacional sem grandes problemas. Vale ressaltar que não há necessidade de nenhum conhecimento especial para utilizar os comandos do Linux, já que o terminal é um programa como qualquer outro. 
+
+We will begin the process of setting featuring basic command lines that will help you use the operating system without major problems. It is worth mentioning that there is no need for any special knowledge to use Linux commands, since the terminal is a program like any other.
+
+.. 
+    Para obter mais detalhes sobre quaisquer comandos listados aqui basta executar o comando seguido de ``--help`` ou precedido de ``man``. 
+    O comando ``--help`` imprimi uma breve descrição dos comandos seguidos de instruções de uso, por exemplo:
+        uname --help
+    Para reduzir a quantidade de conteúdo impresso pode se usar ``less``, por exemplo:
+        ls --help | less
+    Enquanto o comando ``man`` apresenta o manual de instruções do comando solicitado, por exemplo:
+        man cd
+    Os comandos principais são simples, as setas para **cima e baixo** sobem e descem a página, respectivamente, assim como as teclas de setas para **esquerda e direita** fazem a movimentação para leitura dos textos, o **Enter** também faz a página descer. A tecla "**h**" mostra o *help* do comando ``man``, mostrando todas as teclas e atalhos utilizados. E a tecla "**q**" sai da navegação do manual.
+
+.. Tip:: 
+    For more details on any commands listed here, simply execute the command followed by ``--help`` or preceded by ``man``.
+    
+     The ``--help`` command prints a brief description of the commands followed by instructions for use, for example:
+    
+    ::
+
+        uname --help
+
+    To reduce the amount of printed content can use ``less``, for example:
+
+    ::
+
+        ls --help | less
+    
+    While the ``man`` command displays the instruction manual for the requested command, for example:
+
+    ::
+
+        man cd
+
+    The main commands are simple, the arrows for **up and down** go up and down the page, respectively, as well as the arrow keys for **left and right** make the movement for reading the texts, the **Enter** also makes the page go down. The "**h**" key shows the **help** of the ``man`` command, showing all the keys and shortcuts used. And the "**q**" key leaves the manual navigation.
+
+1. ``cat`` **comand**
+::
+
+    cat [OPTION] [FILE]
+
+.. Seu nome é uma derivação da palavra *concatenate* (**concatenar**) e permite que você crie, una e exiba arquivos no formato padrão de tela ou em outro arquivo, entre outras coisas. 
+
+Its name is a derivation of the word *concatenate* and allows you to create, merge and display files in standard screen format or in another file, among other things.
+
+.. Se a opção não for especificada, o comando ``cat`` lê o conteúdo presente no arquivo indicado e o imprime na tela. Por exemplo, ao executar o comando ``cat /etc/issue`` no terminal do Overo, é impresso o ramo e a versão do sistema operacional utilizado. 
+
+If the option is not specified, the ``cat`` command reads the content present in the indicated file and prints it on the screen. For example, when executing the command ``cat/etc/issue`` in the Overo terminal, the branch and the version of the operating system used are printed.
+
+.. figure:: /img/Aerial/comand-cat.png
+	:align: center
+
+.. Note::
+    If you want to know more features, access `Comand Cat Linux - man7.org`_. 
+
+.. _Comand Cat Linux - man7.org: https://www.man7.org/linux/man-pages/man1/cat.1.html
+
+.. https://en.wikipedia.org/wiki/Cat_(Unix)
+
+2. ``uname`` **comand**
+::
+
+    uname [OPTION]
+
+.. O comando ``uname``, nome derivado do termo "Unix Name", apresenta informações detalhadas sobre o seu sistema Linux, como o nome da máquina, do sistema operacional, do kernel e assim por diante. 
+
+.. Por exemplo, a opção ``-a`` solicita a impressão de todas as informações disponíveis pelo programa.
+
+The command ``uname``, a name derived from the term "Unix Name", displays detailed information about your Linux system, such as the name of the machine, the operating system, the kernel and so on.
+
+For example, the option ``-a`` prompts you to print all the information available by the program.
+
+.. figure:: /img/Aerial/comand-uname.png
+	:align: center
+
+3. ``echo`` **comand**
+::
+
+    echo [OPTION] [STRING]
+
+.. O comando ``echo`` é um comando utilizado para exibir mensagens na tela ou em um arquivo. Ao utilizar o comando seguido de uma *string*, o texto da *string* é impresso na tela do terminal. Por exemplo:
+
+The ``echo`` command is a command used to display messages on the screen or in a file. When using the command followed by a *string*, the text of the *string* is printed on the terminal screen. For example:
+
+::
+
+    root@overo:~# echo "Aerolab"
+    Aerolab
+    root@overo:~# echo Aerolab
+    Aerolab
+
+
+4. ``clear`` **comand**
+::
+
+    clear [OPTION]
+
+.. Utilize o comando ``clear`` para limpar o conteúdo da tela de seu terminal. O comando não necessita de parâmetros, ele utiliza variáveis do ambiente de trabalho atual para determinar como limpar a tela. 
+
+Use the ``clear`` command to clear the contents of your terminal screen. The command doesn't require parameters, it uses variables from the current desktop to determine how to clear the screen.
+
+.. figure:: /img/Aerial/comand-clear.png
+    :align: center
+
+5. ``pwd``  **comand**
+::
+
+    pwd [OPTION]
+
+.. O comando pwd é usado para encontrar o caminho para o diretório atual (da pasta) em que você está. O comando vai retornar um caminho completo, que é basicamente um caminho que começa com uma barra inclinada (/). Por exemplo:
+
+The ``pwd`` command is used to find the path to the current directory (folder) where you are. The command will return a full path, which is basically a path that begins with a forward slash (/). For example:
+
+::
+
+    root@overo:~# pwd
+    /home/root
+
+6. ``ls``  **comand**
+::
+
+    ls [OPTION] [FILE]
+
+.. Seu nome deriva das primeiras consoantes da palavra inglesa *list*. O comando ``ls`` é usado para listar o conteúdo dentro de um diretório. Por padrão, esse comando vai mostrar apenas os conteúdos do diretório atual em que você estiver.
+
+Its name derives from the first consonants of the English word "list". The ``ls`` command is used to list content within a directory. By default, this command will show only the contents of the current directory where you are. 
+
+.. Ao utilizar o comando ``ls`` sem especificar nenhuma opção ou diretório, o terminal irá imprimir o conteúdo do diretório atual. Porém, caso deseje ver o conteúdo de outros diretórios, digite **ls**, e então, o caminho do diretório. Por exemplo, escreva ``ls /home/username/Documents`` para ver os conteúdos de **Documents**.
+
+By using the command ``ls`` without specifying any options or directory, the terminal will print the contents of the current directory. However, if you want to see the contents of other directories, type **ls**, and then the path to the directory. For example, type ``ls/home/username/Documents`` to see the contents of **Documents**.
+
+.. Uma opção muito util do comando ``ls`` é a opção ``ls -la`` que além de listar todos os arquivos e pastas no diretório atual também imprime algumas informações úteis sobre cada um deles.
+
+A useful option of the ``ls`` command is the ``ls -la`` option which, in addition to listing all files and folders in the current directory, also prints some useful information about each one.
+
+.. figure:: /img/Aerial/comand-ls.png
+	:align: center
+
+.. A figura apresenta um exemplo de saída do comando ``ls -la``, nele podemos ver que para cada arquivo é impresso uma linha com várias colunas de informação. Explicar o que cada coluna significa se faz desnecessário, entretanto é importante saber o que as primeiras letras significam, pois muitas vezes essa é a causa de alguns problemas.
+
+The figure shows an example of the output of the command ``ls -la``, in it we can see that for each file a line with several columns of information is printed. Explaining what each column means is unnecessary, however it is important to know what the first letters mean, as this is often the cause of some problems.
+
+.. As 10 primeiras colunas que são compostas por "-" e letras variadas indicam o tipo de arquivo e as permissões dos usuários quanto aqueles arquivos. Na figura, a primeira coluna, que é sempre indicada pela letra "d", mostrando que o arquivo é um diretório, se o arquivo fosse um programa ou um arquivo de texto regular este seria indicado por um "-". As noves letras seguintes podem ser separadas em grupos de 3 indicando as permissões do dono, grupo e outros, respectivamente. As letras "r", "w" e "x" indicam leitura, escrita e execução, respectivamente. Se analisarmos, portanto, os dados da pasta "usr" veremos que o dono da pasta possui permissão para ler, escrever e executar, porém seu grupo e outros usuários terão permissão apenas para ler e executar.
+
+The first 10 columns that are composed of "**-**" and varied letters indicate the file type and the users' permissions for those files. In the figure, the first column, which is always indicated by the letter "**d**", showing that the file is a directory, if the file was a program or a regular text file it would be indicated by a "**-**". The next nine letters can be separated into groups of 3 indicating the permissions of the owner, group and others, respectively. The letters "**r**", "**w**" and "**x**" indicate **reading**, **writing** and **execution**, respectively. Therefore, if we analyze the data in the "usr" folder, we will see that the owner of the folder has permission to read, write and execute, but his group and other users will only be allowed to read and execute.
+
+7. ``cd`` **comand**
+::
+
+    cd [OPTION] [DIRECTORY]
+
+.. Seu nome é um acrônimo da expressão inglesa "*change directory*" (mudar diretório) e sua finalidade é, como sugere seu nome, mudar do diretório atual de trabalho, o diretório em que se está, para um outro diretorio. Por exemplo, caso você esteja em **/home/user** e queira ir para **Documents**, um subdiretório do usuario, basta digitar ``cd Documents``.
+
+Its name is an acronym of the English expression "change directory" and its purpose is, as your name suggests, to change from the current working directory, the directory you are in, to another directory. For example, if you are in **/home/user** and want to go to **Documents**, a user subdirectory, just type ``cd Documents``.
+
+.. figure:: /img/Aerial/comand-cd.png
+	:align: center
+
+.. Além disso, existem alguns atalhos que podem ser utilizados para navegar rapidamente. São alguns deles:
+
+In addition, there are some shortcuts that can be used to navigate quickly. Some of them are:
+
+::
+
+    cd ..   # (with two points in a row) move to a directory above (previous).
+
+    cd      # moves directly to the home folder.
+
+    cd-     # (with a hyphen) moves to previous directories.
+
+.. Note::
+    The Linux terminal is sensitive to character types. Therefore, you need to type the name of the directory exactly as it is written (using lowercase or uppercase letters).
+
+8. ``cp`` **comand**
+::
+
+    cp [OPTION] <DIRECTORY SOURCE>
+    
+.. Este comando é usado para copiar arquivos ou diretórios para um diretório específico. Por exemplo, o comando ``cp Documento.txt /home/username/Documentos`` irá criar uma cópia de **Documento.txt** no diretório **Documentos**, caso este documento exista. Já o comando ``cp -R /home/user/projeto /home/user/novo_projeto`` irá copiar o diretório **projeto**, com todos seus arquivos, subdiretórios e arquivos dos subdiretórios para o diretório **novo_projeto**.
+
+This command is used to copy files or directories to a specific directory. For example, the command ``cp Document.txt /home/username/Documents`` will create a copy of **Document.txt** in the **Documents** directory, if this document exists. While the command ``cp -R /home/user/project /home/user/new_project`` will copy the directory **project**, with all its files, subdirectories and files from the subdirectories to the directory **new_project** .
+
+9. ``mv`` **comand**
+::
+
+    mv <HOME DIRECTORY> <DESTINATION DIRECTORY>
+
+.. O nome do comando ``mv`` deriva das primeiras consoantes da palavra inglesa *move* (mover) e seu uso habitual é mover arquivos, ainda que ele possa também ser usado para renomear arquivos. Ou seja, este comando copia e altera o caminho do arquivo original para o caminho desejado e, desse modo, apaga o arquivo original (sendo possível ainda renomear e mudar o diretório de um arquivo simultaneamente).
+
+The name of the command ``mv`` is derived from the first consonants of the English word "move" and its usual use is to move files, although it can also be used to rename files. That is, this command copies and changes the path of the original file to the desired path and, in this way, deletes the original file (it is also possible to rename and change the directory of a file simultaneously).
+
+.. A sintaxe neste comando é similar ao comando ``cp``. Você precisa digitar ``mv``, o nome do arquivo e o diretório de destino. Por exemplo: ``mv file.txt /home/username/Documents``.  
+
+The syntax in this command is similar to the ``cp`` command. You need to type ``mv``, the file name and the destination directory. For example: ``mv file.txt /home/username/Documents``.
+
+.. Já para renomear arquivos, o argumento a ser usado é ``mv nomeantigo.ext nomenovo.ext``, sendo "**nomeantigo.ext**" o arquivo original e "**nomenovo.ext**" o novo arquivo. 
+
+As for renaming files, the argument to be used is ``mv Old_Name.txt Old_Name.txt``, with "**Old_Name.txt**" being the original file and "**New_Name.txt**" being the new file.
+
+10. ``mkdir`` **comand**
+::
+
+    mkdir [OPTION] DIRECTORY
+
+.. O comando ``mkdir`` cria um novo diretório, se ele já não existir. Por exemplo, executar ``mkdir Test`` irá criar um novo diretório chamado **Test**. Seu nome deriva do termo inglês "*Make Directory*", que poderia ser traduzido como "**Criar diretorio**".
+
+The ``mkdir`` command creates a new directory, if it doesn't already exist. For example, execute ``mkdir Test`` will create a new directory called **Test**. Its name derives from the English term "Make Directory".
+
+11. ``rmdir`` **comand**
+::
+
+    rmdir [OPTION] DIRECTORY
+
+.. O comando ``rmdir`` tem a função de apagar (deletar) um diretório e sua sintaxe é similar à do comando ``mkdir``. Porém, este comando só permite que sejam apagados diretórios vazios, sem conteúdo. Seu nome vem do termo em inglês *Remore Directory* (**Remover Diretório**).
+
+The command ``rmdir`` has the function of deleting a directory and its syntax is similar to that of the command ``mkdir``. However, this command only allows empty directories without content to be deleted. Its name comes from the English term "Remore Directory".
+
+12. ``rm`` **comand**
+::
+
+    rm [OPTION] [FILE]
+
+.. O comando rm é usado para apagar um arquivo específico ou diretório com todos os conteúdos que estiverem lá dentro. Por exemplo, executar o comando ``rm /home/user/Documentos/texto.txt`` irá apagar o arquivo *texto.txt*.
+
+The rm command is used to delete a specific file or directory with all the contents inside. For example, running the command ``rm /home/user/Documents/text.txt`` will delete the file *text.txt*.
+
+.. Caso você deseje deletar um diretório específico (como uma alternativa ao rdmir) use ``rm -r [DIRETÓRIO]``.
+
+If you want to delete a specific directory (as an alternative to rdmir) use ``rm -r [DIRECTORY]``.
+
+13. ``chmod`` **comand**
+
+::
+
+    chmod [OPTION] MODE[,MODE FILE    #or
+    chmod [OPTION] MODE-OCTAL FILE    #or
+    chmod [OPTION] --reference=ARQREF FILE.
+
+
+.. O ``chmod`` (abreviação de *change mode*, em português **alterar modo**) é um comando que pode alterar permissões de acesso de objetos do sistema (arquivos e diretórios) e sinalizações (flags) de modo especial. Os sinalizadores (flags) são uma maneira de definir opções e passar argumentos para os comandos que você executa.
+
+The ``chmod`` (short for "change mode") is a command that can change access permissions for system objects (files and directories) and flagging in a special way. The flags are a way to set options and pass arguments to commands that you run.
+
+.. Usualmente, o comando ``chmod`` é usado na forma:
+
+Usually, the command ``chmod`` is used in the form:
+
+::
+
+    chmod <OPTION> <PERMISSIONS> <FILE NAME>
+
+.. Se nenhuma opção for especificada, o ``chmod`` modifica as permissões do arquivo para as permissões especificadas. Há duas maneiras de representar as permissões possíveis: com símbolos (caracteres alfanuméricos) ou com números octais (os dígitos de 0 a 7). Aqui iremos nos ater a explicar apenas o método simbólico.
+
+If none option is specified, ``chmod`` command modifies the file's permissions to the specified permissions. There are two ways to represent the possible permissions: with symbols (alphanumeric characters) or with octal numbers (the digits 0 to 7). Here we will stick to just explain the symbolic method.
+
+.. Como visto anteriormente, os caracteres **r, w e x** representam três tipos de permissões: leitura, gravação e execução, respectivamente. Porém, para especificar o grupo de usuarios ao conceder ou remover uma permissão, o comando utiliza mais alguns simbolos. Para visualizar de forma mais clara, imagine que tais símbolos se encontram em duas listas, e a combinação deles gera a permissão:
+
+As seen earlier, the characters **r, w and x** represent three types of permissions: read, write and execute, respectively. However, to specify the user group when granting or removing a permission, the command uses a few more symbols. To visualize it more clearly, imagine that these symbols are in two lists, and the combination of them generates the permission:
+
+**User Group:**
+::
+
+    u: user owner of the file
+    g: file owner user group
+    O (capital letter 'o'): all other users
+    a: all types of user (owner, group and others)
+
+**Permission type:**
+::
+
+    r: refers to read permissions
+    w: refers to writing permissions
+    x: refers to execution permissions
+
+**In order to be able to combine the symbols of these two lists, operators are used:**
+::
+
+    + : adds permission
+    - : removes permission
+    = : defines permission
+
+.. Para mostrar como as combinações podem ser feitas, oberve os exemplos abaixo:
+
+To show how combinations can be made, note the examples below:
+
+::
+
+    chmod u+w teste.exe     # adds write permission to the file for a user
+
+    chmod g+rw teste.exe    # adds read and write permission to your group
+
+    chmod g=rwx teste.exe   # adds all available permissions to the group
+
+.. Tip::
+    Since this command is relatively complicated, more information can be obtained from `Linux chmod Command`_.
+
+.. _Linux chmod Command: https://www.computerhope.com/unix/uchmod.htm
+
+.. https://pt.wikipedia.org/wiki/Chmod
+
+14. ``sudo`` **comand**
+
+.. O comando ``sudo`` permite que usuários comuns executem tarefas que exigem permissões de outro usuário, em geral o super usuário, para executar tarefas específicas dentro do sistema de maneira segura e controlável pelo administrador. Porém, não é muito aconselhável usá-lo diariamente porque pode ser que um erro aconteça se você fizer algo de errado. O nome é uma forma abreviada de se referir a *Substitute User Do* (**fazer substituição do usuário**) ou *Super User Do* (**fazer como super usuário**).
+
+The ``sudo`` command allows ordinary users to perform tasks that require permissions from another user, usually the super user, to perform specific tasks within the system in a safe and controllable manner by the administrator. However, it is not very advisable to use it on a daily basis because it may be an error if you do something wrong. The name is an abbreviated way of referring to "Substitute User Do" or "Super User Do".
+
+.. Geralmente, o comando ``sudo`` é executado na forma:
+
+Generally, the command ``sudo`` is executed in the form:
+::
+
+    sudo [-u user] <command>
+
+.. Onde <comando> é o comando que deseja executar. A opção [-u usuário] serve para especificar qual usuário deve ser utilizado para executar o comando, se omitida, o comando ``sudo`` assume o usuário root e pede a senha de login para confirmar.
+
+Where <command> is the command you want to execute. The [-u user] option is used to specify which user should be used to execute the command, if omitted, the command ``sudo`` assumes the root user and asks for the login password to confirm.
+
+Exploring the System Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. Passadas essas informações e estes comandos básicos, já somos capazes de explorar os arquivos do sistema. Portanto, vamos migrar para o primeiro diretório do sistema executando ``cd ..`` duas vezes. E em seguida executar o comando ``ls -la`` para que possamos visualizar as pastas do sistema. Se tudo for executado como explicado devemos obter algo como mostrado na figura a seguir.
+
+Once this information and basic commands are passed, we are able to explore the system files. Therefore, we will migrate to the first directory of the system by running ``cd ..`` twice. And then run the command ``ls -la`` so that we can view the system folders. If everything is done as explained we should get something as shown in the following figure.
+
+.. figure:: /img/Aerial/explore-ls.png
+	:align: center
+
+.. Dos vários diretórios presentes na figura, destacam-se os diretórios "**/bin**", "**/boot**", "**/dev**", "**/lib**" e "**/sys**".
+
+Of the various directories present in the figure, the directories "**/bin**", "**/boot**", "**/dev**", "**/lib**" and "**stand out/sys**".
+
+.. O diretório "**/bin**" é aonde ficam armazenados os binários dos comandos essenciais do Linux, como os comandos apresentados anteriormente, logo caso se faça necessário acrescentar ao microprocessador mais algum software que se faça necessário ele deve ser adicionado a esta pasta para que possa ser encontrado pelo sistema operacional quando requisitado.
+
+The directory "**/bin**" is where the binaries of essential Linux commands are stored, such as the commands presented previously, so if it becomes necessary to add any more software to the microprocessor that is necessary, it must be added to this folder so that it can be found by the operating system when requested.
+
+.. O diretório "**/boot**" já foi utilizado neste trabalho e é o local aonde devem ser armazenados os bootloaders e outros programas que fazem parte da inicialização do sistema.
+
+The directory "**/boot**" has already been used in this work and is the place where the bootloaders and other programs that are part of the system boot must be stored.
+
+.. O diretório "**/dev**" é o diretório onde ficam armazenados os arquivos de dispositivos do sistema. Arquivo de dispositivo é uma maneira que o sistema Linux utiliza para gerar uma interface de comunicação com drivers de dispositivos. Ele será muito utilizado mais para a frente durante a comunicação serial, por exemplo.
+
+The "**/dev**" directory is the directory where system device files are stored. Device file is a way that the Linux system uses to generate a communication interface with device drivers. It will be used a lot later on during serial communication, for example.
+
+.. O diretório "**/lib**" é o diretório que contém as bibliotecas essenciais para os binários contidos no diretório "/bin", assim caso seja necessário instalação de um novo software provavelmente também precisaremos adicionar alguma biblioteca a este diretório.
+
+The "**/lib**" directory is the directory that contains the essential libraries for the binaries contained in the "/bin" directory, so if new software installation is necessary, we will probably also need to add some library to this directory.
+
+.. Por último, o diretório "**/sys**" é o diretório que contém informações de dispositivos e drivers. Está pasta será muito utilizado caso seja necessário utilizar funções como *general purpose input/output* (**GPIO**), **I2C** e *direct memory access* (**DMA**).
+
+Finally, the "**/sys**" directory is the directory that contains device and driver information. This folder will be used a lot if it is necessary to use functions such as General Purpose Input/Output (**GPIO**), **I2C** and Direct Memory Access (**DMA**).
+
+References
+----------
+
+* PITA, H. C. Desenvolvimento de sistema de comunicação multiplataforma para veículos aéreos de asa fixa. Faculdade de Tecnologia, Universidade de Brasília, 2018.
+
+* `Linux man pages online`_ - man7.org
+
+* `30 Comandos Linux Que Todo Usuário Deve Conhecer`_ - hostinger.com.br
+
+.. _Linux man pages online: https://www.man7.org/linux/man-pages/index.html
+.. _30 Comandos Linux Que Todo Usuário Deve Conhecer: https://www.hostinger.com.br/tutoriais/comandos-linux

@@ -5,3 +5,10 @@ Using the embedded computer
 
 In this chapter, basic knowledge necessary for handling the embedded computer Gumstix Overo, the Linux operating system and the specific operating system installed will be discussed and, later, tests of the GPIO and serial communication of the embedded computer will be carried out. The information described in these steps is essential for understanding different topics and will be used throughout the work.
 
+.. toctree::
+   :maxdepth: 2
+
+   3.1-Ambient_Linux
+   3.2-CrossCompilation
+   3.3-register
+   3.4-Serial

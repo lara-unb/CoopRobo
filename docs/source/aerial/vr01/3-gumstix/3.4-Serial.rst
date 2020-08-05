@@ -1,0 +1,272 @@
+Serial Communication
+====================
+
+.. A principal característica da comunicação serial é o processo de enviar dados um bit de cada vez, de forma sequencial, através de um canal de comunicação ou barramento. Diferente da comunicação paralela, em que todos os bits de cada símbolo são enviados juntos. 
+
+The main characteristic of serial communication is the process of sending data one bit at a time, sequentially, through a communication channel or bus. Unlike parallel communication, where all bits of each symbol are sent together.
+
+.. Com a finalidade de possibilitar a conversão, transmissão e recepção de dados de forma serial, sendo estes originalmente dispostos de maneira paralela, surge o formato **UART**, acrônimo de *Universal Asynchrounous Receiver/Transmiter* ou Receptor/Transmissor Universal Assíncrono.
+
+In order to enable the conversion, transmission and reception of data in a serial way, which were originally arranged in parallel, the **UART** format emerges, an acronym for Universal Asynchrounous Receiver/Transmiter.
+
+.. O termo "Universal" refere-se a característica do formato dos dados e velocidade serem configuráveis, enquanto "Assíncrono" diz respeito a forma de comunicação em série ocorre, em que os dispositivos não estão continuamente sincronizadas por um sinal de clock comum.
+
+The term "Universal" refers to the characteristic of the data format and speed being configurable, while "Asynchronous" refers to the way in which serial communication occurs, in which the devices are not continuously synchronized by a common clock signal.
+
+.. Note::
+    More details on UART communication can be seen in `Introduction to UART Communication - microcontrollerslab.com`_.
+
+.. _Introduction to UART Communication - microcontrollerslab.com: https://microcontrollerslab.com/uart-communication-working-applications/
+
+.. No caso do Overo, temos três sistemas de Comunicação **UART** implementados por hardware à nossa disposição. O que faz desnecessário qualquer implementação manual através de software utilizando GPIO.
+
+In the case of Overo, we have three Communication Systems **UART** implemented by hardware at our disposal. What makes any manual implementation through software using GPIO unnecessary.
+
+.. Agora vamos entender como funciona o protocolo de comunicação UART. Essa comunicação funciona através da conexão do transmissor (**TX**) de um dispositivo com o receptor (**RX**) de outro dispositivo, no caso, apenas o **TX** realiza alterações no nível de tensão da linha, sendo assim, a comunicação é, para cada conexão, uma via de mão única. Logo, para realizar uma comunicação de mão dupla iremos utilizar duas conexões, uma será a ligação de **RX** do dispositivo 1 com o **TX** do dispositivo 2 e a outra ligação será o oposto, **RX** do dispositivo 2 com **TX** do dispositivo 1, similar a imagem abaixo.
+
+Now let's understand how the UART communication protocol works. This communication works by connecting the transmitter (**TX**) of one device to the receiver (**RX**) of another device, in this case, only **TX** makes changes to the line voltage level , therefore, communication is, for each connection, a one-way street. Therefore, to perform a two-way communication we will use two connections, one will be the **RX** connection from device 1 with **TX** from device 2 and the other connection will be the opposite, **RX** from device 2 with **TX** from device 1, similar to the image below. 
+
+.. figure:: /img/Aerial/UART_bus.png
+    :align: center
+
+.. Podemos analisar a situação da comunicação a nível de bit. Por exemplo, para uma comunicação UART do tipo "8N1" (8 bits de dados, 0 bits de paridade e 1 bit de parada) teremos o canal em estado *IDLE*, que significa "não operando", representado pelo nível de tensão estático em alto. Logo, quando pretende-se iniciar a comunicação é enviado um pulso de nível baixo e em seguida são enviados os oito bits de dados que será acompanhado de um bit de parada em estado alto.
+
+We can analyze the communication situation at bit level. For example, for a UART communication type "8N1" (8 data bits, 0 parity bits and 1 stop bit) we will have the channel in **IDLE** state, which means "not operating", represented by the static voltage level high. Therefore, when the intention is to start the communication, a low level pulse is sent and then the eight data bits are sent, which will be accompanied by a stop bit in a high state.
+
+.. É importante destacar que a função do bit de parada é realizar uma pausa na transmissão para algum processamento interno dos dispositivos, não é necessário, portanto, nenhum tempo adicional entre os dados transmitidos.
+
+It's important to note that the function of the stop bit is to pause the transmission for some internal processing of the devices, therefore, there is no need for any additional time between the transmitted data.
+
+.. Como essa é uma comunicação assíncrona, é essencial que a velocidade da comunicação seja pré-determinada. Essa velocidade geralmente é dada em Baud rate, uma unidade de medida para a quantidade de unidades de sinal enviadas por segundo.
+
+As this is an asynchronous communication, it is essential that the speed of the communication is predetermined. This speed is usually given in Baud rate, a unit of measurement for the number of signal units sent per second.
+
+
+.. :math:`{\mu}s`
+
+.. Note O termo "Baud rate" é utilizado como medida de velocidade de transmissão de dados entre dispositivos. Um baud é uma medida de velocidade de sinalização e representa o número de mudanças na linha de transmissão (seja em frequência, amplitude, fase etc...) ou eventos por segundo.
+
+.. Note::
+    The term "Baud rate" is used to measure the speed of data transmission between devices. A baud is a measure of signaling speed and represents the number of changes in the transmission line (whether in frequency, amplitude, phase, etc.) or events per second.
+
+.. A figura a seguir apresenta um esquemático que ilustra o funcionamento da comunicação UART. Na ilustração a velocidade de comunicação é de 10.000.000 baud/s.
+
+The following figure shows a schematic illustrating how UART communication works. In the illustration, the communication speed is 10,000,000 baud/s.
+
+.. figure:: /img/Aerial/UART_8N1.png
+    :align: center
+    :width: 500px
+
+Particularities of Gumstix Overo
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. Por padrão, a placa de expansão Tobi disponibiliza apenas dois dos UARTs disponíveis no computador em modulo Overo para uso através dos seus pinos. Como pode ser visto na imagem abaixo, a UART1 está conectada aos pinos 10 e 9 e a UART3 está conectada aos pinos 22 e 21. Ainda é importante dizer que a porta serial UART3 é o mesmo pino utilizado pelo "USB console", ou seja, é o mesmo pino que usamos para controlar a Gumstix pelo computador, ou seja, em configuração padrão as mensagens do sistema e as mensagens para o sistema são enviadas por esta porta.
+
+By default, the Tobi expansion card provides only two of the UARTs available on Overo module computer for use via its pins. As can be seen in the image below, UART1 is connected to pins 10 and 9 and UART3 is connected to pins 22 and 21. It's also important to say that the UART3 serial port is the same pin used by the **USB console**, ie , it's the same pin that we use to control Gumstix from the computer, that is, in standard configuration system messages and messages to the system are sent through this port.
+
+.. figure:: /img/Aerial/Pinos_Tobi.png
+    :align: center
+
+    Pin diagram of the tobi expansion card.
+
+.. Caso as duas portas seriais já mencionadas não sejam suficientes, existe ainda a porta serial UART2. Porém, por padrão, está não está disponível em nenhum dos pinos da placa Tobi para nossa utilização. Na verdade, ela foi reservada para comunicar-se com o Bluetooth, contudo apenas versões posteriores do computador embarcado Overo por nos utilizado possuem Bluetooth, portanto podemos, caso necessário, exportar a UART2 para os pinos e utiliza-los. Para utilizar esta porta serial é necessário modificar o *u-boot* de modo a multiplexar sua função ao GPIO 146/147 que, como mostrado na figura anterior, estão ligados aos pinos 29 e 27. Portanto para fazê-lo é necessário modificar o arquivo "overo.h" removendo as linhas de comando referentes ao modo de GPIO dos pinos 146 e 147, remover as linhas que desabilitam a UART2 e adicionar as linhas que habilitam a comunicação serial pela UART2.
+
+If the two serial ports already mentioned are not enough, exist also the UART2 serial port. However, by default, it's not available on any of the pins on the Tobi board for our use. In fact, it was reserved to communicate with Bluetooth, yet only later versions of the Overo embedded computer used by us have Bluetooth, so we can, if necessary, export UART2 to the pins and use them. To use this serial port, it is necessary to modify *u-boot* in order to multiplex its function to GPIO 146/147 which, as shown in the previous figure, are connected to pins 29 and 27. Therefore, to do this it is necessary to modify the file "overo.h" removing the command lines for the GPIO mode from pins 146 and 147, removing the lines that disable UART2 and adding the lines that enable serial communication over UART2.
+
+.. Para entender, detalhadamente, o que precisa ser feito e quais registradores serão alterados deve-se consultar a seção de comunicação serial do Technical Reference Manual (TRM) do processador. Contudo existe um tópico no `Fórum de Discussões da Gumstix`_ que indica diretamente quais alterações devem ser feitos no "u-boot" para que se possa utilizar a UART2, apesar disso a solução apresentada nesse fórum não foi testada durante este trabalho.
+
+To understand, in detail, what needs to be done and which registers will be changed, consult the serial communication section of the processor's Technical Reference Manual (TRM). However, there is a topic in the `Gumstix Discussion Forum`_ that directly indicates what changes must be made to the " u-boot" in order to use UART2, although the solution presented in that forum was not tested during this work.
+
+.. _Gumstix Discussion Forum: http://gumstix.8.x6.nabble.com/Using-UART-2-on-an-Overo-td660403.html
+
+.. testar esse método e detalhar como é feito
+.. http://gumstix.8.x6.nabble.com/template/NamlServlet.jtp?macro=search_page&node=558772&query=UART2
+.. http://gumstix.8.x6.nabble.com/Using-UART-2-on-an-Overo-td660403.html
+
+UART configuration
+~~~~~~~~~~~~~~~~~~
+
+.. Como já comentado anteriormente, o computador embarcado possui um hardware específico para comunicação UART, ou seja, não é necessário realizar uma implementação manual, para utilizar a comunicação UART basta escrever em alguns registradores para enviar a mensagem.
+
+As previously mentioned, the embedded computer has specific hardware for UART communication, in other words, it's not necessary to perform a manual implementation to use UART communication, just write in some registers to send the message. 
+
+.. Na verdade, em nosso caso é ainda mais simples pois o sistema operacional instalado já traz configurado drivers para a aplicação da comunicação serial. Portanto, não é necessário acessar a memória física do dispositivo, precisamos apenas escrever no driver o que deve ser transmitido.
+
+In fact, in our case it is even simpler because the installed operating system already has configured drivers for the application of serial communication. Therefore, it isn't necessary to access the physical memory of the device, we just need to write in the driver what should be transmitted.
+
+.. Os drivers de comunicação serial são arquivos do tipo caractere com nome "**ttyOx**", em que "**x**" é um número exclusivo para cada uma das UARTs. Esses drivers estão localizados em "**/dev**" e funcionam como comunicação em terminal.
+
+The serial communication drivers are files of type character, named "**ttyOx**", where "**x**" represents the unique number of each UART. These drivers are located in "**/dev**" and function as a communication terminal.
+
+.. Por exemplo, o driver "**ttyO2**" é o driver de comunicação serial da porta "**USB Console**" a mesma que conectamos ao computador, ou seja, ao escrever nessa porta escreveremos no computador conectado à Gumstix e ao ler essa porta estaremos lendo o computador. Em outras palavras, escrever ou ler nesse driver terá o mesmo resultado final de chamar, respectivamente, a função ``printf()`` ou ``scanf()``, quando um computador estiver conectado a essa porta com o terminal aberto.
+
+For example, the "**ttyO2**" driver is the serial communication driver for the **USB Console** port, the same one we connect to the computer, that is, when writing to this port we will write on the computer connected to Gumstix and when reading this port we will be reading the computer. In other words, writing or reading in this driver will have the same final result of calling, respectively, the function ``printf ()`` or ``scanf ()``, when a computer is connected to that port with the terminal open.
+
+.. A configuração das portas seriais pode ser feita de duas maneiras, por linhas de comando no terminal Linux ou por um código que altere as configurações do hardware. A mais simples e, novamente, mais limitada ou menos eficiente é a configuração por meio de linhas de comando, a configuração por esse modo costuma ser usada apenas quando feita por um usuário humano em tempo real.
+
+The configuration of the serial ports can be done in two ways, by command lines in the Linux terminal or by a code that changes the hardware settings. The simplest and, again, the most limited or least efficient is the configuration through command lines, the configuration in this way is usually used only when done by a human user in real time.
+
+.. Para realizar a configuração por meio do terminal Linux devemos utilizar o comando ``stty``, já que esse comando possui uma enorme quantidade de parâmetros que permite estabelecer a comunicação serial da forma desejada.
+
+To perform the configuration through the Linux terminal, we must use the command ``stty``, since this command has a huge number of parameters that allows to establish serial communication in the desired way.
+
+.. Note::
+    To view all parameters of the ``stty`` command, just run ``stty --help`` in the terminal.
+
+.. Se, por exemplo, for executada a linha de comando ``stty -F /dev/ttyO0 -a`` serão impressas todas as configurações da comunicação serial **UART1** do dispositivo. Para imprimir apenas as principais configurações, deve-se suprimir o ``-a``, a última opção do comando. Caso a alteração da velocidade seja desejável, ela pode ser alterada simplesmente acrescentando a velocidade desejada ao final da linha de comando.
+
+If, for example, the command line ``stty -F / dev / ttyO0 -a`` is executed, all the serial communication settings **UART1** of the device will be printed. To print only the main settings, you must delete the ``-a``, the last option of the command. If changing the speed is desirable, it can be changed simply by adding the desired speed to the end of the command line.
+
+.. A figura abaixo apresenta um exemplo de configuração da UART1 por meio do terminal de comandos Linux.
+
+The figure below shows an example of configuring UART1 using the Linux command terminal.
+
+.. figure:: /img/Aerial/config_uart1.png
+    :align: center
+
+.. A outra maneira de configurar a comunicação serial feita por esses drivers sem alterar manualmente o conteúdo do endereço físico da memória é com o auxílio da biblioteca "**termios.h**". Essa biblioteca possui uma ampla variedade de funções que configuram a comunicação serial com base nos parâmetros de uma estrutura "**termios**", também definida nesta biblioteca.
+
+The other way to configure the serial communication made by these drivers without manually changing the contents of the physical address of the memory is with the aid of the "**termios.h**" library. This library has a wide variety of functions that configure serial communication based on the parameters of a "**termios**" structure, also defined in this library.
+
+.. Note::
+    More information about the **termios.h library** can be found at `termios.h - Linux manual page`_.
+
+.. _termios.h - Linux manual page: https://man7.org/linux/man-pages/man0/termios.h.0p.html
+
+
+.. São dois os parâmetros da comufile:///home/lucas/Aerial/docs/build/html/aerial/vr01/3-gumstix/3.4-Serial.html#uart-configurationnicação UART, além dos mencionados anteriormente, que se destacam, o número mínimo de bits que se espera ler em cada tentativa de leitura e o tempo máximo de espera por um novo caractere após a transmissão do último caractere e após o número mínimo de caracteres ser atingido.
+
+There are two parameters of UART communication, in addition to those mentioned above, which stand out, the minimum number of bits that are expected to be read at each reading attempt and the maximum time to wait for a new character after the transmission of the last character and after the minimum number of characters to be reached.
+
+.. O número mínimo de bits que se espera ser lido e o tempo máximo de espera pelo próximo bit em décimos de segundo podem ser configurados com os seguintes comandos ``termios.c_cc[VMIN] =`` e ``termios.c_cc[VTIME] =``, em que ``termios`` é o nome de sua estrutura. Para a configuração de velocidade recomenda-se usar a função ``cfsetspeed()``.Já a função ``cfmakeraw()`` configura, além de outros parâmetros, o funcionamento sem bit de paridade e com 8 bits de dados. Após realizados os ajustes na estrutura é necessário ainda executar a função ``cfsetattr()`` para que as alterações sejam feitas na UART.
+
+The minimum number of bits expected to be read and the maximum wait time for the next bit in tenths of a second can be configured with the following commands ``termios.c_cc [VMIN] =`` and ``termios.c_cc [VTIME] =``, where ``termios`` is the name of its structure. For the speed setting, it is recommended to use the function ``cfsetspeed ()``, while the function ``cfmakeraw ()`` configures, in addition to other parameters, the operation without parity bit and with 8 data bits. After making the adjustments to the structure, it is still necessary to execute the function ``cfsetattr ()`` for the changes to be made in the UART.
+
+.. Abaixo encontra-se o código utilizado para configurar a comunicação serial dos computadores Overo. Observe que nessa função de configuração não foi utilizada a flag "O_NONBLOCK" na função "open()" e foi definido como 1 o número mínimo de caracteres a serem retornados após uma tentativa de leitura, portanto caso o código seja executado e nenhuma informação seja enviada para este canal o processador aguardará eternamente por esse caractere. A contagem de tempo, definida como 0,1 segundo, só inicia após o número mínimo de caracteres ser atingido.
+
+Below is the code used to configure the serial communication of Overo computers. Note that in this configuration function the "O_NONBLOCK" flag was not used in the "open ()" function and the minimum number of characters to be returned after an attempt to read was set to 1, so if the code is executed and no information is entered sent to this channel the processor will wait forever for that character. The time count, set to 0.1 second, does not start until the minimum number of characters has been reached.
+
+::
+
+    #include <stdio.h>
+    #include <string.h>
+    #include <unistd.h>
+    #include <fcntl.h>
+    #include <termios.h>
+
+    void main()
+    {
+        struct termios cUART1;
+        int UART1 = open("/dev/ttyO0", O_RDWR);
+
+        if(tcgetattr(UART1,&cUART1))
+            printf("Erro tcgetattr");
+        cfmakeraw(&cUART1);
+        cfsetspeed(&cUART1,B115200); 
+        cUART1.c_cflag &= ~CSTOPB;
+
+        cUART1.c_cc[VMIN] = 1;
+        cUART1.c_cc[VTIME] = 1;
+        if (tcsetattr(UART1, TCSANOW, &cUART1))
+            printf("Erro tcsetattr");
+
+    }
+
+:download:`Download commented code <UART/config_UART.c>`
+
+The following figure shows an example of UART1 configuration using the configuration code above.
+
+.. figure:: /img/Aerial/config_uart1.png
+    :align: center
+
+.. Com a finalidade simplificar a configuração do UART dentro de um outro código, foram efetuadas algumas modificações no código anterior para converte-lo em uma função para configuração de comunicação serial, como pode ser visto abaixo:
+
+.. Note::
+    In order to simplify the configuration of the UART within another code, some modifications were made to the previous code to convert it into a function for configuring serial communication, as shown below:
+
+    ::
+
+        int configUART1()
+        {
+            struct termios cUART1;
+            int UART1 = open("/dev/ttyO0", O_RDWR);
+
+            if(tcgetattr(UART1,&cUART1))
+                printf("Erro tcgetattr");
+            cfmakeraw(&cUART1);
+            cfsetspeed(&cUART1,B115200); 
+            cUART1.c_cflag &= ~CSTOPB;
+
+            cUART1.c_cc[VMIN] = 1;
+            cUART1.c_cc[VTIME] = 1;
+            if (tcsetattr(UART1, TCSANOW, &cUART1))
+                printf("Erro tcsetattr");
+                
+            return UART1;
+        }
+
+.. Uma vez feita a configuração, foi implementado também o código a seguir com a finalidade de testar a comunicação entre dois computadores. No teste, um dispositivo envia uma mensagem para o outro dispositivo que responde com uma mensagem semelhante para o primeiro dispositivo, em seguida ambos os dispositivos imprimem a mensagem recebida.
+
+Once the configuration was made, the following code was also implemented in order to test the communication between two computers. In the test, one device sends a message to the other device that responds with a similar message to the first device, then both devices print the received message.
+
+:: 
+
+    int main()
+    {
+
+        int UART1 = configUART1();  // call the UART configuration function
+        char dis[2], out[100], string[100];
+
+        printf("What device am I?");
+        scanf("%c", &dis[0]);
+        dis[1] = 0;
+        string[0] = 0;
+        strcat(string, "Hello! This is a message from the device");
+        strcat(string, dis);
+
+        // testa UART
+        write(UART1, string, strlen(string));
+        sleep(1);
+        read(UART1, out, 100);
+        printf("Message read by the device %s: %s\n", dis, out);
+        close(UART1);
+        return 0;
+    }
+    
+    
+:download:`Download the complete code <UART/comun_UART.c>`
+
+.. Como os dois dispositivos são idênticos, será necessário conectar o pino 10 de um dispositivo com o pino 9 do outro dispositivo e vice-versa. Utilizando esse código como base é possível enviar qualquer mensagem de até 100 caracteres de um dispositivo ao outro.
+
+Since the two devices are identical, it will be necessary to connect pin 10 of one device with pin 9 of the other device and vice versa. Using this code as a basis it is possible to send any message of up to 100 characters from one device to the other.
+
+.. A figura a seguir apresenta o resultado do teste dos códigos apresentados. Nessa figura podemos ver dois terminais do Linux, cada um vinculado a um computador embarcado, e ambos chamam a mesma função, logo em seguida vemos a mensagem lida por cada um dos dispositivos.
+
+The following figure shows the result of testing the codes presented. In this figure we can see two Linux terminals, each linked to an embedded computer, and both call the same function, right after that we see the message read by each of the devices.
+
+.. figure:: /img/Aerial/UART_com.png
+    :align: center
+
+References
+----------
+
+* PITA, H. C. Desenvolvimento de sistema de comunicação multiplataforma para veículos aéreos de asa fixa. Faculdade de Tecnologia, Universidade de Brasília, 2018.
+
+* `Universal asynchronous receiver-transmitter`_ - wikipedia.org
+
+* `Asynchronous serial communication`_ - wikipedia.org 
+
+* `Como funcionam as UARTs`_ - newtoncbraga.com.br
+
+* `UART Basics`_ - ece353.engr.wisc.edu
+
+* `termios.h(0p) - Linux manual page`_ - man7.org
+
+* `cfsetspeed(3) - Linux man page`_ - linux.die.net
+
+.. _Universal asynchronous receiver-transmitter: https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter
+.. _Asynchronous serial communication: https://en.wikipedia.org/wiki/Asynchronous_serial_communication
+.. _Como funcionam as UARTs: http://newtoncbraga.com.br/index.php/telecom-artigos/1709-#:~:text=UART
+.. _UART Basics: https://ece353.engr.wisc.edu/serial-interfaces/uart-basics/
+.. _termios.h(0p) - Linux manual page: https://man7.org/linux/man-pages/man0/termios.h.0p.html
+.. _cfsetspeed(3) - Linux man page: https://linux.die.net/man/3/cfsetspeed

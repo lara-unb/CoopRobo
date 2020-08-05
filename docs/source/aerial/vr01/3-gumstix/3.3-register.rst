@@ -1,0 +1,382 @@
+Registers
+=========
+
+.. Warning::
+    Este tópico precisa ser testado e reeditado.
+
+.. Seguindo os procedimentos das seções anteriores somos capazes de iniciar o sistema e gerar programas a serem executados pelo sistema operacional. O próximo passo é, portanto, controlar os sinais que podem ser enviados a outros dispositivos pelo computador embarcado para estabelecer a comunicação entre os dispositivos.
+
+Following the procedures of the previous sections we are able to start the system and generate programs to be executed by the operating system. The next step, therefore, is to control the signals that can be sent to other devices by the embedded computer to establish communication between the devices.
+
+.. A comunicação entre dispositivos é feita pela alteração dos níveis de tensão dos pinos do computador embarcado. Esses pinos estão, de uma maneira resumida, conectados a **espaços de memória do sistema** e quando alteramos o bit armazenado neste espaço de memória alteramos também o nível de tensão do pino, permitindo a codificação de uma mensagem e sua transmissão a outro dispositivo.
+
+Communication between devices is done by changing the voltage levels of the embedded computer's pins. These pins are, in summary fashion, connected to **system memory space** and, when we change the bit stored in this memory space, also changed the pin voltage level, allowing the encoding of a message and its transmission to another device.
+
+.. Posteriormente, a comunicação entre dispositivos será mais discutida, mas neste momento o que mais nos importa são os "**espaços de memória**" citados no parágrafo anterior. Esses espaços de memória são na verdade circuitos digitais voláteis que são capazes de armazenar níveis de tensão, o acesso ao conteúdo desses espaços de memória é extremamente rápido e a estes espaços de memória é dado o nome de **registrador**. Os registradores estão no topo da hierarquia de memória, sendo assim o tipo de memória mais rápida de uma unidade central de processamento.
+
+Subsequently, the communication between devices will be more discussed, but at this moment what most matters to us are the **memory spaces**, mentioned in the previous paragraph. These memory spaces are actually volatile digital circuits that are capable os stoting voltage levels, the acess to the contents of these memory spaces is extremely fast and these memory spaces are called **register**. **Registers** are at the top of the memory hierarchy, making them the fastest type of memory in a central processing unit.
+
+.. Dessa forma, para que possamos implementar a comunicação entre dois dispositivos, um modem e o computador embarcado por exemplo, precisamos, primeiro, executar uma tarefa mais simples de alterar os níveis de tensão de um pino. Esse processo de alterar os níveis de tensão de um pino possui diversas aplicações que vão desde o simples controle de **ON/OFF** de um LED até comunicação serial entre dispositivos. Aos pinos com esse propósito é dado o nome de `General Purpose Input/Output`_ (**GPIO**).
+
+So, in order to implement communication between two devices, a modem and the embedded computer, for example, we first need to perform a simpler task of changing the voltage levels of a pin. This process of changing the voltage levels of a pin has several applications, ranging from simple ON / OFF control of an LED to serial communication between devices. Pins for this purpose are called `General Purpose Input/Output`_ (**GPIO**).
+
+.. _General Purpose Input/Output: https://en.wikipedia.org/wiki/General-purpose_input/output
+
+.. **General Purpose Input/Output** (**GPIO**) são, basicamente, pinos de  comunicação de entrada e saída de sinais digitais, de um circuito integrado ou placa de circuito eletrônico, sem finalidade pré-definida, podendo assim ter funções definidas pelo projetista ou usuário para prover uma interface entre outros dispositivos (periféricos, modens, microcontroladores, microprocessadores etc.).
+
+**General Purpose Input/Output** (**GPIO**) are, basically, communication pins for input and output of digital signals, of an integrated circuit or electronic circuit board, with no pre-defined purpose, thus being able to have functions defined by the designer or user to provide an interface between other devices (peripherals, modems, microcontrollers, microprocessors, etc.).
+
+.. Como comentado anteriormente, estamos utilizando o computador embarcado Overo junto a uma placa de expansão Tobi. Uma das funções desta placa é fornecer acesso ao usuário aos pinos do computador embarcado, portanto os pinos do computador embarcado que podemos acessar fisicamente são os pinos da placa de expansão Tobi. Na figura abaixo podemos visualizar um diagrama que contém, de maneira resumida, quais funções ou pinos do computador embarcado estão conectadas a cada pino da placa de expansão Tobi. Observe que alguns desses pinos possuem mais de uma função.
+
+As previously mentioned, we are using the Overo embedded computer next to a Tobi expansion board. One of the functions of Tobi board is to provide user access to the pins of the embedded computer, so the pins of the embedded computer that we can access physically are the pins of the Tobi expansion board. In the figure below we can see a diagram that contains, in summary form, which functions or pins of the embedded computer are connected to each pin of the Tobi expansion board. Note that some of these pins have more than one function.
+
+.. figure:: /img/Aerial/Pinos_Tobi.png
+    :align: center
+    
+    
+    Tobi expansion board pin diagram.
+
+
+GPIO control via terminal
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. A maneira mais simples, porém menos eficiente de se controlar o GPIO está descrita no próprio site da fabricante, disponível em `Control Overo GPIO`_. Lá eles indicam controlar o GPIO pelo próprio terminal do sistema Linux através de um sistema *sysfs*. O sistema *sysfs* é um sistema de “arquivos“ oferecidos pelo núcleo do Linux para o controle e comunicação com dispositivos e drivers através do terminal do Linux.
+
+The simplest, but least efficient way to control the GPIO is described on the manufacturer's own website, available at `Control Overo GPIO`_. They indicate to control the GPIO by the Linux system terminal itself through a *sysfs system*. The *sysfs system* is a system of files offered by the Linux kernel for control and communication with devices and drivers through the Linux terminal.
+
+.. _Control Overo GPIO: https://www.gumstix.com/support/faq/overo-gpio/#cross-compilation
+
+.. Se, por exemplo, desejarmos controlar a saída do **GPIO10** através deste método para piscar um LED precisaremos exportar o **GPIO10** para o espaço do usuário escrevendo ``10`` no arquivo */sys/class/gpio/export*, o que irá gerar um diretório com outros arquivos para a manipulação do **GPIO10**. Em seguida, devemos definir sua direção como de saída escrevendo ``out`` em */sys/class/gpio/gpio10/direction* e definir seu valor como alto ou baixo escrevendo ``1`` ou ``0`` em */sys/class/gpio/gpio10/value*. 
+
+If, for example, we want to control **GPIO10** output using this method to flash an LED, we need to export **GPIO10** to the user space by typing ``10`` in the file */sys/class/gpio/export*, which will generate a directory with other files for **GPIO10** manipulation. Next, we must define its direction as outgoing by writing ``out`` in */sys/class/gpio/gpio10/direction* and define its value as high or low by writing ``1`` or ``0`` in */sys/class/gpio/gpio10/value*.
+
+.. Tip::
+    The interrupt configuration function is also accessible from the terminal.
+
+.. Este processo pode ser feito tanto pelo terminal do usuário com o comando ``echo``, quanto por um programa que abra esse arquivo e escreve nela por nós. Por exemplo, para controlar o **GPIO146** através do terminal podemos executar os seguintes comandos (exemplo utilizado no site da Gumstix):
+
+This process can be done by the user's terminal with the command ``echo``, or by a program that opens this file and writes to it for us. For example, to control **GPIO146** via the terminal, we can execute the following commands (example used on the Gumstix website):
+
+.. Lembrando que o comando ``echo teste > pasta/arquivo`` irá sobrescrever todo o arquivo pela palavra "teste" e o comando ``cat pasta/arquivo`` irá exibir o conteúdo do arquivo.
+
+.. Note::
+    Remembering that the command ``echo test > folder/file`` will overwrite the entire file with the word 'test' and the command ``cat folder/file`` will display the contents of the file.
+
+::
+
+    root@overo# echo 146 > /sys/class/gpio/export
+    root@overo:/sys/class/gpio# cat gpio146/direction
+    in
+    root@overo# echo out > /sys/class/gpio/gpio146/direction
+    root@overo:/sys/class/gpio# cat gpio146/direction
+    out
+    root@overo# cat /sys/class/gpio/gpio146/value
+    0
+    root@overo# echo 1 > /sys/class/gpio/gpio146/value
+    root@overo# cat /sys/class/gpio/gpio146/value
+    1
+
+This command will control pin 27 on the Tobi board.
+
+.. Tip::
+    If you don't have a meter, a 1.8V LED can be used. Use pin 1 as the ground.
+
+.. Porém, como já comentado, esse método é bem lento e não pode ser utilizado para comunicação entre dispositivos. Entretanto para atividades com períodos superiores a 100 milissegundos este método pode ser utilizado tranquilamente.
+
+However, as already mentioned, this method is very slow and cannot be used for communication between devices. Thought, for activities over 100 milliseconds, this method can be used smoothly.
+
+.. Outra abordagem, utilizando o mesmo método, é utilizar um código semelhante ao código apresentado abaixo, que escreve diretamente nos arquivos do **GPIO**. Essa abordagem foi testada e melhorou consideravelmente, através de um simples código, o tempo de resposta do GPIO.
+
+Another approach, using the same method, is to use code similar to the code shown below, which writes directly to **GPIO** files. This approach has been tested and has considerably improved, through a simple code, the GPIO response time.
+
+:: 
+
+    #include <stdio.h>
+    #include <string.h>
+    #include <stdlib.h>
+    #include <unistd.h>
+    #include <fcntl.h>
+    #include <termios.h>
+
+    int main()
+    {
+        int arq = open("/sys/class/gpio/export", O_WRONLY);
+        write(arq, "10", 2);
+        close(arq);
+
+        arq = open("/sys/class/gpio/gpio10/direction", O_WRONLY);
+        write(arq, "out", 3);
+        close(arq);
+
+        arq = open("/sys/class/gpio/gpio10/value", O_RDWR);
+        
+        for (int i = 0; i < 10000; i++)
+        {
+            write(arq, "1", 1);
+            //usleep (500000);
+            write(arq, "0", 1);
+            //usleep (500000) ;   
+        }
+        close(arq);
+
+        return 0;
+    }
+
+:download:`Downloaded commented code 1 <GPIO/t1-gpio.c>`
+
+.. Para testar o código, o pino 18 (pino do **GPIO** 10) foi conectado a um osciloscópio com o objetivo de medir o período da forma de onda. O resultado dessa medida pode ser visto na figura abaixo, nela podemos ver a amplitude da forma de onda de 1,96 V, frequência de 33,76 kHz e período de 29,62 microssegundos. Para a maioria das aplicações podemos utilizar esse método.
+
+To test the code, pin 18 (**GPIO** pin 10) was connected to an oscilloscope in order to measure the period of the waveform. The result of this measurement can be seen in the figure below, in which we can see the amplitude of the wave form of 1.96 V, frequency of 33.76 kHz and period of 29.62 microseconds. For most applications we can use this method.
+
+.. trocar esta imagem
+
+.. figure:: /img/Aerial/teste1-gpio.png
+	:align: center
+
+GPIO control via registers
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. Outra maneira de se controlar o GPIO é escrevendo diretamente nos registradores do sistema. Apesar de o procedimento ser um pouco mais complexo essa, na verdade, é a maneira mais comum e mais recomendada de se realizar esse procedimento oferecendo resultados muito mais rápidos.
+
+Another way to control the GPIO is to write directly to the system registers. Although the procedure is a little more complex, this is actually the most common and recommended way to perform this procedure, offering much faster results.
+
+.. Para utilizar este método precisamos, primeiro, definir em quais registradores devemos escrever e o que devemos escrever neles. Essa informação só pode ser encontrada no :download:`Technical Reference Manual (TRM) <TRM_DM3730.pdf>` do processador DM3730, disponivel no site da `Texas Instruments`_.
+
+To use this method, we first need to define which registers to write to and what to write to. This information can only be found at :download:`Technical Reference Manual (TRM) <TRM_DM3730.pdf>` of the DM3730 processor, available on the `Texas Instruments`_ website.
+
+.. _Texas Instruments: https://www.ti.com/
+
+.. Como é explicado na seção **25** do TRM do processador DM3730, a partir da página 3477, a interface de controle combina seis bancos de GPIO. Cada modulo de GPIO providencia 32 pinos, totalizando 192 pinos que podem ser utilizados como input e/ou output. Em nosso caso apenas alguns desses 192 pinos estão fisicamente acessíveis, como pode ser visto na figura apresentada abaixo. Cada banco de GPIO possui 26 registradores distribuídos a partir de um endereço de base, sendo que cada um desses registradores possui um comprimento de 32 bits ou 4 bytes.
+
+As explained in section **25** of the DM3730 processor TRM, starting on page 3477, the control interface combines six GPIO banks. Each GPIO module provides 32 pins, totaling 192 pins that can be used as input and/or output. In our case, only some of these 192 pins are physically accessible, as can be seen in the figure shown below. Each GPIO bank has 26 registers distributed from a base address, each register having a length of 32 bits or 4 bytes.
+
+.. figure:: /img/Aerial/interface-gpio.png
+    :align: center
+    
+    
+    Diagram of the GPIO interface.
+
+.. A figura foi retirada do *Technical Reference Manual* do processador DM3730 e mostra um pouco mais detalhadamente como esses pinos estão distribuídos entre os módulos dos GPIO. A explicação detalhada de cada um desses registradores pode ser encontrada no manual do processador DM3730.
+
+.. Note::
+    The figure was taken from the Technical Reference Manual of the DM3730 processor and shows a little more detail how these pins are distributed among the GPIO modules. A detailed explanation of each of these registers can be found in the DM3730 processor manual.
+
+.. Neste trabalho apenas dois dos registradores serão comentados de forma a ilustrar o funcionamento desses registradores.
+
+In this work, only two of the registers will be commented in order to illustrate the functioning of these registers.
+
+.. O registrador "**GPIO_OE**" é o registrador que define a direção do pino que está sendo configurado. A abreviação "OE" vem de *output enable*. Esse registrador possui um offset de endereço igual a "0x034", ou seja, seu endereço será o endereço de base do modulo do GPIO mais 34 em hexadecimal. Esse registrador possui 32 bits do tipo "Read/White", ou assim, se o pino correspondente à porta GPIO estiver armazenando o valor **0**, essa porta GPIO estará configurada para operar como output, caso neste pino esteja o valor **1** a porta estará configurada como input.
+
+The register **GPIO_OE** is the register that defines the direction of the pin being configured. The abbreviation "OE" comes from "Output Enable". This register has an address offset equal to "0x034", that is, its address will be the base address of the GPIO module plus 34 in hexadecimal. This register has 32 bits of type "Read/White", or so, if the pin corresponding to the GPIO port is storing the value **0**, this GPIO port will be configured to operate as an output, if this pin is the value **1** the port will be configured as an input.
+
+.. O registrador **GPIO_SETDATAOUT** é o registrador que tem a função de colocar o bit correspondente ao registrador **GPIO_DATAOUT** em 1. Ou seja, se tudo estiver configurado corretamente, surgirá no pino físico o valor de tensão equivalente ao bit 1. Esse registrador possui endereço de offset igual a "0x094". Assim como o registrador comentado anteriormente este registrador é constituído por 32 bits do tipo "RW". A leitura de qualquer um dos bits deste registrador retorna o valor do bit correspondente em **GPIO_DATAOUT**.
+
+The register **GPIO_SETDATAOUT** is the register that has the function of setting the bit corresponding to the register **GPIO_DATAOUT** to 1. That is, if everything is set correctly, the voltage value equivalent to bit 1 will appear on the physical pin. This register has an offset address equal to "0x094". Like the register mentioned above, this register consists of 32 bits of type "RW". Reading any of the bits in this register returns the value of the corresponding bit in **GPIO_DATAOUT**.
+
+.. Além dos registradores apresentados na seção 25 do *Technical Reference Manual*, também é necessário configurar um registrador do *System Control Module* (**SCM**). O SCM é um módulo que permite o controle através de *software* de várias funções do dispositivo. Para nossa aplicação, o SCM é o ponto primário de controle da função de GPIO e é nele onde vamos realizar a multiplexação, que determina se o pino irá operar na função de GPIO ou em sua função específica, e definiremos se o GPIO será do tipo *pullup* ou *pulldown*, por exemplo.
+
+In addition to the registers shown in section 25 of the Technical Reference Manual, it's also necessary to configure a register for the **System Control Module** (**SCM**). SCM is a module that allows control through software of various functions of the device. For our application, the SCM is the primary control point for the GPIO function and it is where we will perform the multiplexing, which determines whether the pin will operate in the GPIO function or in its specific function, and we will define whether the GPIO will be of the type pullup or pulldown, for example.
+
+.. Os registradores do SCM são divididos em cinco classes. Entretanto, para nossa aplicação iremos utilizar apenas uma, o bloco de registradores de configuração e multiplexação. Esse bloco é um conjunto de registradores de 32 bits, que configura 2 pinos e define, além dos dois parâmetros mencionados anteriormente, a função de *wakeup*. Aos registradores pertencentes a esse bloco é dado o nome de *Configuration Register Functionality*.
+
+SCM registrars are divided into five classes. However, for our application we will use only one, the block of configuration and multiplexing registers. This block is a set of 32-bit registers, which configures 2 pins and defines, in addition to the two parameters mentioned above, the **wakeup** function. Registrars belonging to this block are called **Configuration Register Functionality**.
+
+.. Note:: 
+    More information about SCM can be found in section 13 of the Technical Reference Manual.
+
+.. Para encontrarmos qual o endereço de cada registrador deste tipo podemos procurar na tabela 13-4 do TRM. Nessa tabela será dado o endereço físico exato de cada registrador (base+offset). No caso o endereço base é o próprio endereço dos registradores "PADCONFS" da interface do SCM, encontrado na seção 13.6.1 do TRM e o endereço offset de cada registrador deste bloco pode ser encontrado na tabela 13-73 do mesmo documento.
+
+To find the address of each register of this type we can look in table 13-4 of the TRM. This table will be given the exact physical address of each register (base + offset). In this case, the base address is the address of the "PADCONFS" registers of the SCM interface, found in section 13.6.1 of the TRM and the offset address of each register in this block can be found in table 13-73 of the same document.
+
+.. Após a identificação dos registradores podemos iniciar a elaboração de um código para modifica-los. Assim nos deparamos com mais um desafio, sistemas operacionais trabalham com dois conceitos de memória, memória física e memória virtual. Memória física é a memória do hardware, aquela qual sabemos o endereço e pois verificamos no TRM. Entretanto se criarmos um ponteiro que aponta para a memória "0x4800000", por exemplo, ele não irá apontar para a memória física que possui este endereço pois o sistema operacional mapeia um espaço da memória física diferente para cada programa com os principais objetivos de aumentar a segurança e evitar conflitos de dados entre programas.
+
+After the identification of the registrars, we can start the elaboration of a code to modify them. So we face yet another challenge, operating systems work with two concepts of memory, physical memory and virtual memory. Physical memory is the memory of the hardware, the one that we know the address and because we checked in the TRM. However, if we create a pointer that points to the memory "0x4800000", for example, it will not point to the physical memory that has this address because the operating system maps a different physical memory space for each program with the main objectives of increasing the security and avoid data conflicts between programs.
+
+.. Entretanto para ter acesso à memória física do sistema precisamos solicitar ao sistema operacional que mapeie esse espaço de memória para a aplicação. Uma maneira de realizar esse procedimento é através da função "mmap()". 
+
+However, to have access to the physical memory of the system, we need to ask the operating system to map this memory space to the application. One way to do this is through the ´´mmap ()´´ function.
+
+.. Note::
+    Details on how this function works and its parameters can be found at `mmap(2) — Linux manual page`_.
+
+.. _mmap(2) — Linux manual page: https://man7.org/linux/man-pages/man2/mmap.2.html
+
+.. Vamos supor que queremos mapear o espaço de memória físico de "**0x45000000**" até "**0x45001000**" e para isso decidimos usar a função ``mmap()``. Portanto, chamamos a função da seguinte maneira, por exemplo, ``mmap(NULL,0x1000,PROT_WRITE || PROT_READ,MAP_SHARED,fd,0x45000000)``, executando isso a função irá retornar um ponteiro que aponta para um endereço de memória virtual endereçado no endereço de memória física "**0x45000000**". Em que, para ter acesso à memória física do dispositivo, "**fd**" é o *file descriptor* direcionado para "/dev/mem". 
+
+Let's assume that we want to map the physical memory space from **0x45000000** to **0x45001000** and for that we decided to use the ``mmap ()`` function. Therefore, we call the function as follows, for example, ``mmap(NULL,0x1000,PROT_WRITE || PROT_READ,MAP_SHARED,fd,0x45000000)``, by executing this the function will return a pointer that points to a virtual memory address addressed to the physical memory address **0x45000000**. Where, to access the physical memory of the device, "**fd**" is the **file descriptor** directed to "/dev/mem".
+
+.. Com essas informações, temos tudo o que é necessário para implementar testes acerca deste modo de operação. A seguir temos um código que aplica o método descrito nesta seção para alternar o nível de tensão do pino "186". Esse código foi implementado para se realizar o mesmo teste da seção "Controle do GPIO via terminal".
+
+With this information, we have everything that is necessary to implement tests on this operating mode. Below is a code that applies the method described in this section to toggle the voltage level of pin **186**. This code was implemented to perform the same test as the section "GPIO control via terminal".
+
+.. NoteO código abaixo foi obtido no `Fórum de Discussões da Gumstix`_ e foram realizadas pequenas alterações para evitar o excesso de informação e facilitar sua compreensão.
+
+.. Note::
+    The code below was obtained from the `Gumstix Discussion Forum`_ and minor changes were made to avoid excessive information and facilitate its understanding.
+
+.. _Gumstix Discussion Forum: http://gumstix.8.x6.nabble.com/Direct-register-access-control-of-GPIO-ARM-interface-on-Overo-Water-TOBI-SOLVED-td4965117.html
+
+.. Todos os códigos precisam ser testados no laboratório e bugs devem ser corrigidos
+.. Essa edição é temporaria
+
+::
+
+    // Local includes definition
+    #include <stdio.h>    // for lprint instruction
+    #include <stdlib.h>
+    #include <fcntl.h>    // ok for mmap 
+    #include <sys/mman.h> // ok for mmap
+    #include <unistd.h>
+
+    // Defines local parameters (from TRM)
+    #define SCM_INTERFACE_BASE 0x48002000
+    #define SCM_PADCONFS_BASE 0x48002030
+    #define CONTROL_PADCONF_SYS_NIRQ (*(volatile unsigned long *)0x480021E0)
+    #define CONTROL_PADCONF_SYS_NIRQ_OFFSET 0x1B0
+
+    #define GPIO6_BASE 0x49058000
+    #define GPIO6_SYSCONFIG_OFFSET 0x10
+    #define GPIO6_CLEARDATAOUT_OFFSET 0x90
+    #define GPIO6_SETDATAOUT_OFFSET 0x94
+    #define GPIO6_OE_OFFSET 0x34
+    #define GPIO6_CTRL_OFFSET 0x30
+
+    #define MAP_SIZE (volatile unsigned long)4 * 1024
+    #define MAP_MASK (volatile unsigned long)(MAP_SIZE - 1)
+
+    // Defines "volatile unsigned long" how "u32"
+    #define u32 volatile unsigned long
+
+    // Defines commom variables
+    u32 *A;
+    u32 *B;
+
+    int main() // Local functions definition
+    {
+        // Defines local variables
+        unsigned long i;
+        int fd;
+        int j;
+
+        fd = open("/dev/mem", O_RDWR | O_SYNC); // "O_RDWR" opens the file for reading and writing & "O_SYNC" guarantees that the call will not return before all data has been transferred to the disk
+
+        A = (u32 *)mmap(NULL, MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, SCM_INTERFACE_BASE & ~MAP_MASK); // creates a new mapping in the virtual address space
+
+        *(u32 *)((u32)A + 0x30 + CONTROL_PADCONF_SYS_NIRQ_OFFSET) |= (0x00040000); //set mode 4 on the pad 186 configuration register; enables digital pin use
+
+        close(fd);
+        /********/
+
+        fd = open("/dev/mem", O_RDWR | O_SYNC);
+        
+        B = (volatile unsigned long *)mmap(NULL, MAP_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, GPIO6_BASE & ~MAP_MASK); // COM1 0x4806A000
+
+        //gpio_186 handling
+        *(u32 *)((u32)B + GPIO6_SYSCONFIG_OFFSET) |= 0x00000004; // bit2=1 enable/wake up, free running clock
+
+        //*(u32 *)((u32)B + GPIO6_CTRL_OFFSET) &= 0xfffffffe; // bit0=0 module enabled, clock not gated , clock=interface clock divided by 8
+
+        *(u32 *)((u32)B+GPIO6_CTRL_OFFSET)&= 0xfffffff8;  // bit0=0,bit1=0,bit2=0 module enabled, clock not gated , clock=interface clock not divided
+
+        *(u32 *)((u32)B + GPIO6_OE_OFFSET) &= 0xfbffffff; // bit26=0, gpio_186 output
+
+        // generate a pulse stream on gpio_186 pin output
+
+        for (j = 0; j < 1000000; j++)
+        {
+            *(u32 *)((u32)B + (GPIO6_CLEARDATAOUT_OFFSET)) |= 0x04000000;
+            //printf("Saida = 0\n");
+            //usleep(1000000);
+
+
+            *(u32 *)((u32)B + (GPIO6_SETDATAOUT_OFFSET)) |= 0x04000000;
+            //printf("Saida = 1\n");
+            //usleep(1000000);
+        }
+        close(fd);
+        return (0);
+    }
+
+
+:download:`Downloaded commented code 2 <GPIO/t2-fusao.c>`
+
+.. O código acima foi testado da mesma maneira que o código apresentado na seção anterior. Já na figura a seguir é possível ver o resultado deste teste. Observe que dessa vez o tempo obtido foi 720,3 nano segundos, ou seja, aproximadamente 42 vezes mais rápido que o resultado do outro método. Além disso, podemos observar que a forma de onda não é mais um sinal retangular exato, a presença de um efeito capacitivo retardando o processo é evidente, portanto, é possível que essa seja a velocidade máxima em que o sinal de um pino pode ser alterado.
+
+The code above was tested in the same way as the code presented in the previous section. In the following figure, you can see the result of this test. Note that the time obtained was 720.3 nanoseconds, that is, approximately 42 times faster than the result of the other method. Moreover, we can observe that the waveform is no longer an exact rectangular signal, the presence of a capacitive effect slowing the process is evident, therefore, it is possible that this is the maximum speed at which the signal of a pin can be changed .
+
+.. adicionar imagem
+
+.. Muito dificilmente alguma aplicação envolvendo GPIO não será satisfeita por algum dos métodos aqui apresentados.
+
+Very hardly any application involving GPIO will not be satisfied by any of the methods presented here.
+
+Problems writing to registers
+-----------------------------
+
+.. verificar se este problema ocorre com qualquer registrador
+
+.. Para finalizar este último tópico é necessário destacar alguns problemas recentemente encontrados envolvendo escrita em registradores.
+
+To conclude this last topic, it is necessary to highlight some recently encountered problems involving writing in registers.
+
+.. O primeiro problema encontrado ocorre sempre que tentamos alterar o valor dos registradores "**0x49050030**", "**0x49056030**" e "**0x49058030**", responsáveis por controlar o clock de todo o bloco do "**GPIO_2**", "**GPIO_5**" e "**GPIO_6**", respectivamente. 
+
+The first problem encountered occurs whenever we try to change the value of registers "**0x49050030**", "**0x49056030**" and "**0x49058030**", responsible for controlling the clock of the entire block of "**GPIO_2**","**GPIO_5**" and "**GPIO_6**", respectively.
+
+.. Note ``devmem2`` é um comando que executa um programa simples para ler ou escrever em qualquer espaço de memoria. Mais informações podem ser encontradas em `devmem2 - Ubuntu Manual`_.
+
+.. Note::
+    ``devmem2`` is a command that executes a simple program to read or write in any memory space. More information can be found in `devmem2 - Ubuntu Manual`_.
+
+.. _devmem2 - Ubuntu Manual: http://manpages.ubuntu.com/manpages/focal/man1/devmem2.1.html#name
+
+.. O que ocorre é que instantes após a alteração do valor do registrador, seu valor retorna ao que possuía antes de ser alterado. Como o teste desta seção apresentou frequência muito alta ele não foi interrompido por este efeito, porém o fenômeno ocorre inclusive quando alteramos valores dos registradores por comandos do terminal, como o ``devmem2``. Esse problema está exemplificado na figura abaixo, onde executamos o comando ``devmem2 0x49058030 w 0x2`` para modificar o registrador **0x49058030** que é o registrador que controla o clock de todo o bloco do **GPIO6**.
+
+What happens is that moments after changing the value of the register, its returns the value it had before being changed. As the test in this section had a very high frequency, it was not interrupted by this effect, but the phenomenon occurs even when we change values of the registers by terminal commands, such as ``devmem2``. This problem is exemplified in the figure below, where we execute the command ``devmem2 0x49058030 w 0x2`` to modify the register **0x49058030** which is the register that controls the clock of the entire **GPIO_6** block.
+
+.. figure:: /img/Aerial/register-erro.png
+    :align: center
+
+.. Tal modificação deveria realizar uma redução na velocidade do clock dividindo-o por 2, como indicado no Technical Reference Manual (TRM) do processador DM3730, na tabela 25-29, página 3528, onde é explicado que o **GPIO_CTRL** pode ter seu clock dividido por certos valores pré-cadastrados, como apresentado na figura a seguir.
+
+Such modification should reduce the clock speed by dividing it by 2, as indicated in the Technical Reference Manual (TRM) of the DM3730 processor, in table 25-29, page 3528, where it is explained that the **GPIO_CTRL** may have its clock divided by certain pre-registered values, as shown in the following figure.
+
+.. figure:: /img/Aerial/GPIO_CTRL.png
+    :align: center
+
+.. Porém, logo após a execução do comando é realizado um procedimento de leitura que garante que tudo foi escrito no registrador como o esperado. No entanto, o mesmo comando, executado instantes depois no modo de leitura, sempre retorna ao valor anteriormente armazenado, o valor existente no registrador antes da modificação. Vale ressaltar que este problema não ocorre para o método de controle do GPIO via terminal, este método opera até que receba uma ordem de parada do usuário.
+
+However, immediately after executing the command, a reading procedure is performed that ensures that everything was written in the register as expected. Though, the same command, executed moments later in read mode, always returns to the previously stored value, the value existing in the register before the modification. It's worth mentioning that this problem doesn't occur for the GPIO control method via terminal, this method operates until it receives a stop order from the user.
+
+.. O segundo problema encontrado ocorre quando tentamos alterar o valor dos registradores **0x49052030** e **0x49054030**, responsáveis por controlar o clock de todo o bloco do **GPIO_3** e do **GPIO_4**, respectivamente. Nesses registradores em específico, ao tentar executar o comando ``devmem2`` para alterar o clock de um determinado bloco de GPIO ou apenas realizar uma leitura, o sistema retorna o erro "*bus error*" como apresentado na figura abaixo, onde executamos o mesmo comando no registrador **0x**. 
+
+The second problem found occurs when we try to change the value of the registers **0x49052030** and **0x49054030**, responsible for controlling the clock of the entire block of **GPIO_3** and **GPIO_4**, respectively. In these specific registers, when trying to execute the command ``devmem2`` to change the clock of a given GPIO block or just perform a reading, the system returns the error "*bus error*" as shown in the figure below, where we execute the same command in register **0x49054030**.
+
+.. figure:: /img/Aerial/register-bus_erro.png
+    :align: center
+
+.. Dessa forma, foi possível apenas alterar o clock do bloco do **GPIO_1**, como pode ser visto na imagem abaixo. 
+
+Thus, it was only possible to change the **GPIO_1** block clock, as can be seen in the image below.
+
+.. figure:: /img/Aerial/register-clock.png
+    :align: center
+
+.. Não sabemos por quais motivos esses fenômenos estão ocorrendo com os blocos de 2 a 6, porém suspeitasse que alguns processos do sistema operacional estejam impedindo que o clock de tais blocos seja alterados, provavelmente por algum circuito interno ou operação depende de tais valores pré-definidos ou até por alguma restrição no consumo de energia. 
+
+We do not know why these phenomena are occurring with blocks 2 to 6, but suspect that some processes of the operating system are preventing the clock of such blocks from being changed, probably by some internal circuit or operation depends on such pre-defined values or even some restriction on energy consumption.
+
+ 
+References
+----------
+
+* PITA, H. C. Desenvolvimento de sistema de comunicação multiplataforma para veículos aéreos de asa fixa. Faculdade de Tecnologia, Universidade de Brasília, 2018.
+
+* TEXAS INSTRUMENTS. AM/DM37x Multimedia Device Technical Reference Manual. 12500 TI Blvd, Dallas, TX 75243, EUA, 2012. Version R. Disponível em: `ti.com`_.
+
+* Direct register access control of GPIO ARM interface on Overo Water +TOBI - `Gumstix Discussion Forum`_ 
+
+.. _Gumstix Discussion Forum: http://gumstix.8.x6.nabble.com/Direct-register-access-control-of-GPIO-ARM-interface-on-Overo-Water-TOBI-SOLVED-td4965117.html
+
+.. _ti.com: http://www.ti.com/
+
